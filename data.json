@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-09 21:47 GMT+8",
+  "updatedAt": "2026-03-09 22:17 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -305,11 +305,11 @@
           "确认竞争情况",
           "必要时进入代码排查"
         ],
-        "issueState": "OPEN",
+        "issueState": "CLOSED",
         "links": {
           "issue": "https://github.com/Scottcjn/rustchain-bounties/issues/1490"
         },
-        "status": "Open",
+        "status": "Closed",
         "comments": [
           {
             "id": "IC_kwDORGgqa87vmm36",
@@ -775,6 +775,21 @@
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4023570001",
             "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87v2DSk",
+            "author": {
+              "login": "Scottcjn"
+            },
+            "authorAssociation": "OWNER",
+            "body": "Completed via Rustchain PR #721 (createkr, merged).",
+            "createdAt": "2026-03-09T13:48:26Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4023923876",
+            "viewerDidAuthor": false
           }
         ]
       },
@@ -907,6 +922,21 @@
             "reactionGroups": [],
             "url": "https://github.com/RobertoCorti/skfeaturellm/issues/33#issuecomment-4023132080",
             "viewerDidAuthor": true
+          },
+          {
+            "id": "IC_kwDOOM5s0c7v2SuL",
+            "author": {
+              "login": "RobertoCorti"
+            },
+            "authorAssociation": "OWNER",
+            "body": "Hi @668308 \nThanks for the help, I've just assigned you for this task\n",
+            "createdAt": "2026-03-09T13:58:01Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/RobertoCorti/skfeaturellm/issues/33#issuecomment-4023987083",
+            "viewerDidAuthor": false
           }
         ]
       },
