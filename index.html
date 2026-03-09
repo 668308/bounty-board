@@ -3,303 +3,74 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>赏金作战看板</title>
+  <title>赏金经营看板</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #111315;
-      --bg-soft: #161a1d;
-      --panel: #1b2025;
-      --panel-2: #20262c;
-      --border: #2c343d;
-      --text: #f3f5f7;
-      --muted: #9aa4af;
-      --blue: #8bb6ff;
-      --green: #8fd0ad;
-      --amber: #d9bd83;
-      --red: #d99aa3;
-      --shadow: 0 10px 28px rgba(0,0,0,.18);
-      --radius: 16px;
+      --bg:#121418;
+      --panel:rgba(25,31,39,.88);
+      --panel-2:rgba(31,38,47,.92);
+      --border:rgba(255,255,255,.09);
+      --text:#f4f7fb;
+      --muted:#a8b3c2;
+      --blue:#8fbcff;
+      --green:#96ddb5;
+      --amber:#f0cc8c;
+      --red:#e7a0aa;
+      --purple:#c0a8ff;
+      --shadow:0 14px 36px rgba(0,0,0,.22);
+      --radius:18px;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
-      color: var(--text);
-      line-height: 1.5;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(111,195,255,.22), transparent 26%),
+        radial-gradient(circle at 100% 0%, rgba(192,168,255,.18), transparent 28%),
+        radial-gradient(circle at 20% 100%, rgba(150,221,181,.14), transparent 22%),
+        radial-gradient(circle at 100% 100%, rgba(240,204,140,.12), transparent 24%),
+        linear-gradient(180deg, #171b21 0%, #12161c 100%);
+      min-height:100vh;
+      line-height:1.5;
     }
-    .shell {
-      max-width: 1480px;
-      margin: 0 auto;
-      padding: 22px 16px 36px;
+    .shell{max-width:1480px;margin:0 auto;padding:22px 16px 36px}
+    .hero{
+      background:linear-gradient(180deg, rgba(31,38,47,.82), rgba(24,30,37,.86));
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
     }
-    .hero {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 14px;
-    }
-    .eyebrow {
-      display: inline-block;
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    .title {
-      margin: 10px 0 8px;
-      font-size: clamp(30px, 4vw, 42px);
-      line-height: 1.08;
-      letter-spacing: -.03em;
-      font-weight: 800;
-    }
-    .subtitle {
-      margin: 0;
-      max-width: 760px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .updated {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .stats, .triple, .hero-bottom, .hero-side, .stack, .side-list, .flow, .board {
-      display: grid;
-      gap: 12px;
-    }
-    .stats { margin-top: 18px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .hero-bottom { margin-top: 14px; grid-template-columns: 1fr 1fr; }
-    .triple { grid-template-columns: repeat(3, 1fr); }
-    .hero-side, .stack, .side-list { grid-template-columns: 1fr; }
-    .flow { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-    .board { margin-top: 14px; grid-template-columns: repeat(6, minmax(230px, 1fr)); align-items: start; }
-    .cardish, .col, .task, .side-item, .mini, .flow-step {
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-    .cardish { padding: 16px; }
-    .stat-label, .mini-k, .flow-step .k, .block-title, .section-title {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    .stat-value {
-      margin-top: 8px;
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -.03em;
-    }
-    .stat-small, .mini-sub {
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .side-card h3, .cardish h3 {
-      margin: 0 0 10px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .side-item {
-      padding: 12px;
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: flex-start;
-    }
-    .side-item .name {
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .side-item .desc {
-      margin-top: 4px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .pill, .tag, .risk-badge, .stage, .count, .price, .usd {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 5px 9px;
-      white-space: nowrap;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.02);
-    }
-    .pill.blue, .tag.status, .price { color: var(--blue); }
-    .pill.green, .tag.low, .usd, .risk-low { color: var(--green); }
-    .pill.amber, .tag.medium, .risk-medium { color: var(--amber); }
-    .pill.red, .tag.high, .risk-high { color: var(--red); }
-    .mini, .flow-step { padding: 12px; }
-    .mini-v, .flow-step .n {
-      margin-top: 8px;
-      font-size: 18px;
-      font-weight: 800;
-    }
-    .section-title {
-      margin: 22px 2px 10px;
-    }
-    .col {
-      overflow: hidden;
-      box-shadow: none;
-      min-height: 360px;
-    }
-    .col-head {
-      padding: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,.01);
-    }
-    .col-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: currentColor;
-      opacity: .9;
-    }
-    .cards {
-      padding: 12px;
-    }
-    .empty {
-      padding: 12px;
-      font-size: 13px;
-      color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: 14px;
-    }
-    .task {
-      padding: 14px;
-      margin-bottom: 12px;
-      box-shadow: none;
-      background: #1d2329;
-    }
-    .task-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: flex-start;
-    }
-    .task h3 {
-      margin: 0;
-      font-size: 15px;
-      line-height: 1.35;
-      font-weight: 700;
-      letter-spacing: -.01em;
-    }
-    .right-badges {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      align-items: flex-end;
-    }
-    .meta {
-      margin-top: 10px;
-      display: grid;
-      gap: 4px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .meta strong { color: var(--text); font-weight: 600; }
-    .tag-row, .links, .stage-row {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .links a {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 12px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 6px 10px;
-    }
-    .progress-wrap { margin-top: 12px; }
-    .progress-head {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 6px;
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      font-weight: 700;
-    }
-    .bar {
-      height: 8px;
-      border-radius: 999px;
-      background: #14181d;
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .bar > span {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg, #6d93d8, #98baf5);
-    }
-    .stage.active {
-      color: var(--text);
-      border-color: #3a444e;
-      background: #252c33;
-    }
-    ul {
-      margin: 8px 0 0;
-      padding-left: 18px;
-      color: #d5dbe2;
-    }
-    li {
-      margin: 5px 0;
-      font-size: 13px;
-    }
-    .footer {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .claiming .dot { color: var(--amber); }
-    .doing .dot { color: var(--blue); }
-    .review .dot { color: #b9a8ea; }
-    .payment .dot { color: var(--green); }
-    .watching .dot { color: #b6bec8; }
-    .dropped .dot { color: var(--red); }
-    @media (max-width: 1400px) {
-      .board { grid-template-columns: repeat(3, minmax(240px, 1fr)); }
-      .hero-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 860px) {
-      .shell { padding: 16px 12px 28px; }
-      .hero { padding: 18px; }
-      .stats, .triple { grid-template-columns: repeat(2, 1fr); }
-      .hero-bottom, .flow, .board { grid-template-columns: 1fr; }
-      .title { font-size: 32px; }
-    }
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+    .eyebrow{display:inline-block;font-size:12px;color:#c8d3e2;letter-spacing:.08em;text-transform:uppercase;font-weight:800}
+    .title{margin:10px 0 8px;font-size:clamp(30px,4vw,42px);line-height:1.08;letter-spacing:-.03em;font-weight:850}
+    .subtitle{margin:0;max-width:760px;color:var(--muted);font-size:14px}.updated{margin-top:12px;color:var(--muted);font-size:12px}
+    .stats,.triple,.hero-bottom,.hero-side,.stack,.side-list,.flow,.board{display:grid;gap:12px}
+    .stats{margin-top:18px;grid-template-columns:repeat(4,minmax(0,1fr))}.hero-bottom{margin-top:14px;grid-template-columns:1fr 1fr}.triple{grid-template-columns:repeat(3,1fr)}.hero-side,.stack,.side-list{grid-template-columns:1fr}.flow{grid-template-columns:repeat(5,minmax(0,1fr))}.board{margin-top:14px;grid-template-columns:repeat(6,minmax(230px,1fr));align-items:start}
+    .cardish,.col,.task,.side-item,.mini,.flow-step{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius)}
+    .cardish{padding:16px;backdrop-filter: blur(8px)}
+    .stat-label,.mini-k,.flow-step .k,.block-title,.section-title{font-size:11px;color:#c1cbda;letter-spacing:.08em;text-transform:uppercase;font-weight:800}
+    .stat-value{margin-top:8px;font-size:28px;font-weight:850;letter-spacing:-.03em}.stat-small,.mini-sub{margin-top:8px;color:var(--muted);font-size:12px}
+    .side-card h3,.cardish h3{margin:0 0 10px;font-size:13px;font-weight:800;color:var(--text)}
+    .side-item{padding:12px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start;background:rgba(255,255,255,.03)}
+    .side-item .name{font-size:13px;font-weight:800}.side-item .desc{margin-top:4px;font-size:12px;color:var(--muted)}
+    .pill,.tag,.risk-badge,.stage,.count,.price,.usd{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-size:11px;font-weight:800;padding:5px 9px;white-space:nowrap;border:1px solid var(--border);background:rgba(255,255,255,.04)}
+    .pill.blue,.tag.status,.price{color:var(--blue)}.pill.green,.tag.low,.usd,.risk-low{color:var(--green)}.pill.amber,.tag.medium,.risk-medium{color:var(--amber)}.pill.red,.tag.high,.risk-high{color:var(--red)}
+    .mini,.flow-step{padding:12px}.mini-v,.flow-step .n{margin-top:8px;font-size:18px;font-weight:850}.section-title{margin:22px 2px 10px;color:#d8e3f2}
+    .col{overflow:hidden;min-height:360px;box-shadow:var(--shadow);background:rgba(31,38,47,.84)}
+    .col-head{padding:14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(255,255,255,.025)}
+    .col-title{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800}.dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.95;box-shadow:0 0 12px currentColor}.cards{padding:12px}
+    .empty{padding:12px;font-size:13px;color:var(--muted);border:1px dashed var(--border);border-radius:14px;background:rgba(255,255,255,.02)}
+    .task{padding:14px;margin-bottom:12px;background:rgba(37,44,53,.88)}.task-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.task h3{margin:0;font-size:15px;line-height:1.35;font-weight:800;letter-spacing:-.01em}.right-badges{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+    .meta{margin-top:10px;display:grid;gap:4px;color:var(--muted);font-size:12px}.meta strong{color:var(--text);font-weight:700}.tag-row,.links,.stage-row{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+    .links a{color:var(--text);text-decoration:none;font-size:12px;border:1px solid var(--border);border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.03)}
+    .progress-wrap{margin-top:12px}.progress-head{display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px;color:#c1cbda;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.bar{height:8px;border-radius:999px;background:#1a1f25;border:1px solid var(--border);overflow:hidden}.bar>span{display:block;height:100%;background:linear-gradient(90deg,#7fa8f0,#afc9ff)}
+    .stage.active{color:var(--text);border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.08)}ul{margin:8px 0 0;padding-left:18px;color:#dde3ea}li{margin:5px 0;font-size:13px}.footer{margin-top:16px;padding:14px 16px;border-radius:16px;border:1px solid var(--border);background:rgba(31,38,47,.72);color:var(--muted);font-size:12px;backdrop-filter: blur(8px)}
+    .claiming .dot{color:var(--amber)}.doing .dot{color:var(--blue)}.review .dot{color:var(--purple)}.payment .dot{color:var(--green)}.watching .dot{color:#d5dde6}.dropped .dot{color:var(--red)}
+    @media (max-width:1400px){.board{grid-template-columns:repeat(3,minmax(240px,1fr))}.hero-grid{grid-template-columns:1fr}} @media (max-width:860px){.shell{padding:16px 12px 28px}.hero{padding:18px}.stats,.triple{grid-template-columns:repeat(2,1fr)}.hero-bottom,.flow,.board{grid-template-columns:1fr}.title{font-size:32px}}
   </style>
 </head>
 <body>
@@ -307,54 +78,54 @@
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">WANGCAI · MANAGEMENT BOARD</div>
-          <h1 class="title">赏金作战看板</h1>
-          <p class="subtitle">保持简约，但更像老板会看的经营面板。自动排序、收益折算、风险分级与进度流转统一展示。</p>
+          <div class="eyebrow">WANGCAI · EXECUTIVE REPORT</div>
+          <h1 class="title">赏金经营看板</h1>
+          <p class="subtitle">用于经营汇报的赏金任务面板。核心关注：当前推进、预估收益、风险暴露、流转效率，以及下一步动作。</p>
           <div class="updated" id="updated">加载中...</div>
           <div class="stats" id="stats"></div>
           <div class="hero-bottom">
-            <div class="cardish"><h3>进度流转</h3><div class="flow" id="flow"></div></div>
+            <div class="cardish"><h3>任务流转概览</h3><div class="flow" id="flow"></div></div>
             <div class="stack">
-              <div class="cardish"><h3>收益统计</h3><div class="triple" id="earnings"></div></div>
-              <div class="cardish"><h3>风险分级</h3><div class="triple" id="risk"></div></div>
+              <div class="cardish"><h3>收益概览</h3><div class="triple" id="earnings"></div></div>
+              <div class="cardish"><h3>风险暴露</h3><div class="triple" id="risk"></div></div>
             </div>
           </div>
         </div>
         <div class="hero-side">
-          <div class="cardish"><h3>当前主战任务</h3><div class="side-list" id="focus"></div></div>
-          <div class="cardish"><h3>下一步动作</h3><div class="side-list" id="actions"></div></div>
+          <div class="cardish"><h3>当前主推进事项</h3><div class="side-list" id="focus"></div></div>
+          <div class="cardish"><h3>待办优先动作</h3><div class="side-list" id="actions"></div></div>
         </div>
       </div>
     </section>
 
-    <div class="section-title">任务流转</div>
+    <div class="section-title">任务分布</div>
     <section class="board" id="board"></section>
 
-    <div class="footer">当前为经营面板风格。RTC 的美元折算仅用于内部排序参考，不代表真实可成交价格。</div>
+    <div class="footer">这是经营汇报风格版本。收益折算中的 RTC 价格仅用于内部优先级判断，不代表真实可成交价格。</div>
   </div>
 
   <script>
-    const columns={claiming:'正在抢',doing:'正在做',review:'等 Review',payment:'等付款',watching:'候选 / 观察',dropped:'已放弃'};
-    const statMeta=[['active','Active','当前推进中的主线任务'],['watching','Watching','候选与观察池'],['waitingReview','Review','等待维护者动作'],['waitingPayment','Payment','待收款 / 待确认']];
-    const stageLabel={candidate:'候选',claiming:'Claim',draftPr:'Draft PR',review:'Review',merged:'Merged',paid:'Paid',dropped:'Dropped',sourcing:'Sourcing'};
+    const columns={claiming:'待认领',doing:'推进中',review:'待审核',payment:'待回款',watching:'候选储备',dropped:'已放弃'};
+    const statMeta=[['active','推进任务','当前实际在推进中的事项'],['watching','储备任务','可随时进入执行的候选池'],['waitingReview','待审核','等待维护者或对方反馈'],['waitingPayment','待回款','已完成但尚未收款确认']];
+    const stageLabel={candidate:'候选',claiming:'认领',draftPr:'草稿PR',review:'审核中',merged:'已合并',paid:'已回款',dropped:'放弃',sourcing:'搜单中'};
     const riskWeight={high:0,medium:1,low:2};
     const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
     const riskClass=l=>l==='high'?'risk-high':l==='medium'?'risk-medium':'risk-low';
     const pillClass=l=>l==='high'?'red':l==='medium'?'amber':l==='low'?'green':'blue';
     function sortItems(items){return [...items].sort((a,b)=>((b.priorityScore||0)-(a.priorityScore||0))||((b.payoutUsdEst||0)-(a.payoutUsdEst||0))||((b.progress||0)-(a.progress||0))||((riskWeight[a.riskLevel]??9)-(riskWeight[b.riskLevel]??9)));}
     function renderStats(summary){return statMeta.map(([k,l,h])=>`<div class="cardish"><div class="stat-label">${l}</div><div class="stat-value">${summary[k]??0}</div><div class="stat-small">${h}</div></div>`).join('')}
-    function renderFlow(p){return [['claimed','Claimed'],['draftPr','Draft PR'],['review','Review'],['merged','Merged'],['paid','Paid']].map(([k,l])=>`<div class="flow-step"><div class="k">${l}</div><div class="n">${p?.[k]??0}</div></div>`).join('')}
-    function renderMini(obj, defs, type){return Object.entries(defs).map(([k,l])=>`<div class="mini"><div class="mini-k">${l}</div><div class="mini-v">${esc(obj?.[k]??0)}</div><div class="mini-sub">${type==='earn'&&k.endsWith('UsdEst')?'USD estimate':''}</div></div>`).join('')}
-    function renderFocus(data){const focus=sortItems(data.columns.doing||[]).slice(0,2); if(!focus.length)return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有主战任务</div></div><span class="pill blue">idle</span></div>'; return focus.map(item=>`<div class="side-item"><div><div class="name">${esc(item.title)}</div><div class="desc">${esc(item.status)} · ${esc(item.payout||'')} · ≈ $${esc(item.payoutUsdEst||0)} · 风险 ${esc(item.riskLevel||'')}</div></div><span class="pill ${pillClass(item.riskLevel)}">${esc(item.priority||'active')}</span></div>`).join('')}
-    function renderActions(data){const acts=[];(data.columns.doing||[]).forEach(i=>(i.nextActions||[]).forEach(x=>acts.push({text:x,level:i.priority||'medium',score:i.priorityScore||0})));(data.columns.review||[]).forEach(i=>acts.push({text:`盯 ${i.title} 的 review / merge`,level:i.priority||'medium',score:i.priorityScore||0}));(data.columns.watching||[]).forEach(i=>acts.push({text:`评估 ${i.title}`,level:i.priority||'low',score:i.priorityScore||0})); const top=acts.sort((a,b)=>b.score-a.score).slice(0,4); if(!top.length)return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有动作项</div></div><span class="pill blue">idle</span></div>'; return top.map(a=>`<div class="side-item"><div><div class="name">${esc(a.text)}</div><div class="desc">当前优先动作</div></div><span class="pill ${pillClass(a.level)}">next</span></div>`).join('')}
-    function renderMeta(item){const rows=[item.repo&&`<div><strong>仓库：</strong>${esc(item.repo)}</div>`,item.type&&`<div><strong>类型：</strong>${esc(item.type)}</div>`,item.status&&`<div><strong>状态：</strong>${esc(item.status)}</div>`,item.ownerRisk&&`<div><strong>风险备注：</strong>${esc(item.ownerRisk)}</div>`,typeof item.priorityScore==='number'&&`<div><strong>优先级分：</strong>${esc(item.priorityScore)}</div>`].filter(Boolean); return rows.length?`<div class="meta">${rows.join('')}</div>`:''}
-    function renderTags(item){const tags=[]; if(item.priority)tags.push(`<span class="tag ${esc(item.priority)}">${esc(item.priority)}</span>`); if(item.status)tags.push(`<span class="tag status">${esc(item.status)}</span>`); if(item.riskLevel)tags.push(`<span class="risk-badge ${riskClass(item.riskLevel)}">risk ${esc(item.riskLevel)}</span>`); return tags.length?`<div class="tag-row">${tags.join('')}</div>`:''}
+    function renderFlow(p){return [['claimed','已认领'],['draftPr','草稿PR'],['review','审核中'],['merged','已合并'],['paid','已回款']].map(([k,l])=>`<div class="flow-step"><div class="k">${l}</div><div class="n">${p?.[k]??0}</div></div>`).join('')}
+    function renderMini(obj, defs, type){return Object.entries(defs).map(([k,l])=>`<div class="mini"><div class="mini-k">${l}</div><div class="mini-v">${esc(obj?.[k]??0)}</div><div class="mini-sub">${type==='earn'&&k.endsWith('UsdEst')?'美元折算参考':''}</div></div>`).join('')}
+    function renderFocus(data){const focus=sortItems(data.columns.doing||[]).slice(0,2); if(!focus.length)return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有主推进事项</div></div><span class="pill blue">idle</span></div>'; return focus.map(item=>`<div class="side-item"><div><div class="name">${esc(item.title)}</div><div class="desc">${esc(item.status)} · ${esc(item.payout||'')} · ≈ $${esc(item.payoutUsdEst||0)} · 风险 ${esc(item.riskLevel||'')}</div></div><span class="pill ${pillClass(item.riskLevel)}">${esc(item.priority||'active')}</span></div>`).join('')}
+    function renderActions(data){const acts=[];(data.columns.doing||[]).forEach(i=>(i.nextActions||[]).forEach(x=>acts.push({text:x,level:i.priority||'medium',score:i.priorityScore||0})));(data.columns.review||[]).forEach(i=>acts.push({text:`跟进 ${i.title} 的审核 / 合并进度`,level:i.priority||'medium',score:i.priorityScore||0}));(data.columns.watching||[]).forEach(i=>acts.push({text:`评估 ${i.title}`,level:i.priority||'low',score:i.priorityScore||0})); const top=acts.sort((a,b)=>b.score-a.score).slice(0,4); if(!top.length)return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有优先动作</div></div><span class="pill blue">idle</span></div>'; return top.map(a=>`<div class="side-item"><div><div class="name">${esc(a.text)}</div><div class="desc">当前优先动作</div></div><span class="pill ${pillClass(a.level)}">next</span></div>`).join('')}
+    function renderMeta(item){const rows=[item.repo&&`<div><strong>仓库：</strong>${esc(item.repo)}</div>`,item.type&&`<div><strong>任务类型：</strong>${esc(item.type)}</div>`,item.status&&`<div><strong>当前状态：</strong>${esc(item.status)}</div>`,item.ownerRisk&&`<div><strong>风险说明：</strong>${esc(item.ownerRisk)}</div>`,typeof item.priorityScore==='number'&&`<div><strong>优先级分：</strong>${esc(item.priorityScore)}</div>`].filter(Boolean); return rows.length?`<div class="meta">${rows.join('')}</div>`:''}
+    function renderTags(item){const tags=[]; if(item.priority)tags.push(`<span class="tag ${esc(item.priority)}">${esc(item.priority)}</span>`); if(item.status)tags.push(`<span class="tag status">${esc(item.status)}</span>`); if(item.riskLevel)tags.push(`<span class="risk-badge ${riskClass(item.riskLevel)}">风险 ${esc(item.riskLevel)}</span>`); return tags.length?`<div class="tag-row">${tags.join('')}</div>`:''}
     function renderLinks(item){if(!item.links)return''; const html=Object.entries(item.links).map(([k,v])=>`<a href="${esc(v)}" target="_blank" rel="noopener noreferrer">${esc(k)}</a>`).join(''); return html?`<div class="links">${html}</div>`:''}
-    function renderProgress(item){if(typeof item.progress!=='number')return''; return `<div class="progress-wrap"><div class="progress-head"><span>进度</span><span>${item.progress}%</span></div><div class="bar"><span style="width:${Math.max(0,Math.min(100,item.progress))}%"></span></div></div>`}
+    function renderProgress(item){if(typeof item.progress!=='number')return''; return `<div class="progress-wrap"><div class="progress-head"><span>推进进度</span><span>${item.progress}%</span></div><div class="bar"><span style="width:${Math.max(0,Math.min(100,item.progress))}%"></span></div></div>`}
     function renderStages(item){const active=item.stage||''; const shown=['candidate','claiming','draftPr','review','merged','paid']; return `<div class="stage-row">${shown.map(s=>`<span class="stage ${s===active?'active':''}">${stageLabel[s]}</span>`).join('')}</div>`}
     function renderBullets(title,items,prefix=''){if(!items?.length)return''; return `<div class="block-title">${title}</div><ul>${items.map(x=>`<li>${prefix}${esc(x)}</li>`).join('')}</ul>`}
-    function renderTask(item){return `<article class="task"><div class="task-top"><h3>${esc(item.title||'')}</h3><div class="right-badges">${item.payout?`<div class="price">${esc(item.payout)}</div>`:''}${typeof item.payoutUsdEst==='number'&&item.payoutUsdEst>0?`<div class="usd">≈ $${item.payoutUsdEst.toFixed(2)}</div>`:''}</div></div>${renderMeta(item)}${renderTags(item)}${renderProgress(item)}${renderStages(item)}${renderLinks(item)}${renderBullets('备注',item.notes)}${renderBullets('下一步',item.nextActions,'➡ ')}</article>`}
-    fetch('./data.json').then(r=>r.json()).then(data=>{document.getElementById('updated').textContent=`更新时间：${data.updatedAt} · 时区：${data.timezone} · RTC 估值参考：$${data.fx?.RTC_USD_EST ?? '?'} / RTC`;document.getElementById('stats').innerHTML=renderStats(data.summary||{});document.getElementById('flow').innerHTML=renderFlow(data.summary?.pipeline||{});document.getElementById('earnings').innerHTML=renderMini({locked:data.summary?.earnings?.locked,pending:data.summary?.earnings?.pending,paid:data.summary?.earnings?.paid,lockedUsdEst:`≈ $${(data.summary?.earnings?.lockedUsdEst??0).toFixed(2)}`,pendingUsdEst:`≈ $${(data.summary?.earnings?.pendingUsdEst??0).toFixed(2)}`,paidUsdEst:`≈ $${(data.summary?.earnings?.paidUsdEst??0).toFixed(2)}`},{locked:'Locked',pending:'Pending',paid:'Paid'},'earn');document.getElementById('risk').innerHTML=renderMini(data.summary?.risk||{},{high:'High Risk',medium:'Medium Risk',low:'Low Risk'},'risk');document.getElementById('focus').innerHTML=renderFocus(data);document.getElementById('actions').innerHTML=renderActions(data);document.getElementById('board').innerHTML=Object.entries(columns).map(([key,title])=>{const items=sortItems(data.columns?.[key]||[]);return `<section class="col ${key}"><div class="col-head"><div class="col-title"><span class="dot"></span>${title}</div><span class="count">${items.length}</span></div><div class="cards">${items.length?items.map(renderTask).join(''):'<div class="empty">暂无任务</div>'}</div></section>`}).join('')}).catch(err=>{document.getElementById('updated').textContent='加载失败：'+err})
+    function renderTask(item){return `<article class="task"><div class="task-top"><h3>${esc(item.title||'')}</h3><div class="right-badges">${item.payout?`<div class="price">${esc(item.payout)}</div>`:''}${typeof item.payoutUsdEst==='number'&&item.payoutUsdEst>0?`<div class="usd">≈ $${item.payoutUsdEst.toFixed(2)}</div>`:''}</div></div>${renderMeta(item)}${renderTags(item)}${renderProgress(item)}${renderStages(item)}${renderLinks(item)}${renderBullets('事项说明',item.notes)}${renderBullets('下一步计划',item.nextActions,'➡ ')}</article>`}
+    fetch('./data.json').then(r=>r.json()).then(data=>{document.getElementById('updated').textContent=`更新时间：${data.updatedAt} · 时区：${data.timezone} · RTC 折算参考：$${data.fx?.RTC_USD_EST ?? '?'} / RTC`;document.getElementById('stats').innerHTML=renderStats(data.summary||{});document.getElementById('flow').innerHTML=renderFlow(data.summary?.pipeline||{});document.getElementById('earnings').innerHTML=renderMini({locked:data.summary?.earnings?.locked,pending:data.summary?.earnings?.pending,paid:data.summary?.earnings?.paid,lockedUsdEst:`≈ $${(data.summary?.earnings?.lockedUsdEst??0).toFixed(2)}`,pendingUsdEst:`≈ $${(data.summary?.earnings?.pendingUsdEst??0).toFixed(2)}`,paidUsdEst:`≈ $${(data.summary?.earnings?.paidUsdEst??0).toFixed(2)}`},{locked:'已锁定',pending:'待确认',paid:'已回款'},'earn');document.getElementById('risk').innerHTML=renderMini(data.summary?.risk||{},{high:'高风险',medium:'中风险',low:'低风险'},'risk');document.getElementById('focus').innerHTML=renderFocus(data);document.getElementById('actions').innerHTML=renderActions(data);document.getElementById('board').innerHTML=Object.entries(columns).map(([key,title])=>{const items=sortItems(data.columns?.[key]||[]);return `<section class="col ${key}"><div class="col-head"><div class="col-title"><span class="dot"></span>${title}</div><span class="count">${items.length}</span></div><div class="cards">${items.length?items.map(renderTask).join(''):'<div class="empty">暂无任务</div>'}</div></section>`}).join('')}).catch(err=>{document.getElementById('updated').textContent='加载失败：'+err})
   </script>
 </body>
 </html>
