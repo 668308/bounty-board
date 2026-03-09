@@ -35,21 +35,201 @@
       ]
     },
     {
-      "title": "RustChain bounty #1493",
+      "title": "RustChain bounty #1511",
       "repo": "Scottcjn/rustchain-bounties",
-      "issueNumber": 1493,
-      "type": "Docs / quickstart",
-      "payout": "25 RTC",
-      "payoutUsdEst": 1.25,
+      "issueNumber": 1511,
+      "type": "Bridge / ledger tracking",
+      "payout": "RTC bounty",
+      "payoutUsdEst": 0,
       "priority": "medium",
-      "priorityScore": 72,
+      "priorityScore": 78,
       "riskLevel": "medium",
-      "stage": "candidate",
-      "progress": 10,
+      "stage": "claiming",
+      "progress": 12,
       "notes": [
-        "比 1494 碰撞略小",
-        "依然是 RTC 支付",
-        "如果要抢，最好直接开 draft PR 而不是空口 claim"
+        "已公开认领",
+        "偏规格/追踪型任务，难度中高",
+        "先卡位，后续看 maintainer 反馈再决定是否深做"
+      ],
+      "nextActions": [
+        "观察评论反馈",
+        "如维护者确认，补更具体实现路径"
+      ]
+    },
+    {
+      "title": "RustChain bounty #1509",
+      "repo": "Scottcjn/rustchain-bounties",
+      "issueNumber": 1509,
+      "type": "Solana SPL deployment tracking",
+      "payout": "RTC bounty",
+      "payoutUsdEst": 0,
+      "priority": "medium",
+      "priorityScore": 76,
+      "riskLevel": "medium",
+      "stage": "claiming",
+      "progress": 12,
+      "notes": [
+        "已公开认领",
+        "偏部署/规格任务",
+        "先占坑，避免今天参与量浪费在尸体单"
+      ],
+      "nextActions": [
+        "等待反馈",
+        "如确认可做，再细化计划"
+      ]
+    },
+    {
+      "title": "RustChain bounty #1510",
+      "repo": "Scottcjn/rustchain-bounties",
+      "issueNumber": 1510,
+      "type": "Base ERC-20 deployment tracking",
+      "payout": "RTC bounty",
+      "payoutUsdEst": 0,
+      "priority": "medium",
+      "priorityScore": 76,
+      "riskLevel": "medium",
+      "stage": "claiming",
+      "progress": 12,
+      "notes": [
+        "已公开认领",
+        "偏部署/规格任务",
+        "需避免投入过深"
+      ],
+      "nextActions": [
+        "观察反馈",
+        "确认后再推进"
+      ]
+    },
+    {
+      "title": "RustChain bounty #1512",
+      "repo": "Scottcjn/rustchain-bounties",
+      "issueNumber": 1512,
+      "type": "Claim page / eligibility flow",
+      "payout": "RTC bounty",
+      "payoutUsdEst": 0,
+      "priority": "medium",
+      "priorityScore": 77,
+      "riskLevel": "medium",
+      "stage": "claiming",
+      "progress": 12,
+      "notes": [
+        "已公开认领",
+        "范围中高",
+        "先卡位，后续再决定是否深做"
+      ],
+      "nextActions": [
+        "观察反馈",
+        "维护者回应后细化方案"
+      ]
+    },
+    {
+      "title": "RustChain bounty #1490",
+      "repo": "Scottcjn/rustchain-bounties",
+      "issueNumber": 1490,
+      "type": "Bugfix / regression test",
+      "payout": "35 RTC",
+      "payoutUsdEst": 1.75,
+      "priority": "medium",
+      "priorityScore": 82,
+      "riskLevel": "medium",
+      "stage": "claiming",
+      "progress": 18,
+      "notes": [
+        "已公开认领",
+        "比大 spec 单更容易落地",
+        "值得继续观察是否能真推进"
+      ],
+      "nextActions": [
+        "确认竞争情况",
+        "必要时进入代码排查"
+      ]
+    },
+    {
+      "title": "livepeer/docs #803",
+      "repo": "livepeer/docs",
+      "issueNumber": 803,
+      "type": "Docs test extension",
+      "payout": "Unknown",
+      "payoutUsdEst": 0,
+      "priority": "high",
+      "priorityScore": 86,
+      "riskLevel": "low",
+      "stage": "claiming",
+      "progress": 22,
+      "notes": [
+        "已公开认领",
+        "评论少，范围相对清楚",
+        "是当前优先开工候选之一"
+      ],
+      "nextActions": [
+        "看测试脚本",
+        "评估最快 PR 路径"
+      ]
+    },
+    {
+      "title": "livepeer/docs #804",
+      "repo": "livepeer/docs",
+      "issueNumber": 804,
+      "type": "Post-migration audit runner",
+      "payout": "Unknown",
+      "payoutUsdEst": 0,
+      "priority": "medium",
+      "priorityScore": 74,
+      "riskLevel": "medium",
+      "stage": "claiming",
+      "progress": 18,
+      "notes": [
+        "已公开认领",
+        "评论少",
+        "可继续观察，但不是第一优先"
+      ],
+      "nextActions": [
+        "看迁移相关脚本",
+        "判断实现成本"
+      ]
+    },
+    {
+      "title": "skfeaturellm #33",
+      "repo": "RobertoCorti/skfeaturellm",
+      "issueNumber": 33,
+      "type": "Python bugfix / sklearn compatibility",
+      "payout": "Unknown",
+      "payoutUsdEst": 0,
+      "priority": "high",
+      "priorityScore": 88,
+      "riskLevel": "low",
+      "stage": "claiming",
+      "progress": 24,
+      "notes": [
+        "已公开认领",
+        "问题清楚，评论少",
+        "是当前优先开工候选之一"
+      ],
+      "nextActions": [
+        "复现 sklearn 兼容问题",
+        "准备修复路径"
+      ]
+    },
+    {
+      "title": "content-js-sdk #254",
+      "repo": "episerver/content-js-sdk",
+      "issueNumber": 254,
+      "type": "Preview / draft behavior bugfix",
+      "payout": "Unknown",
+      "payoutUsdEst": 0,
+      "priority": "high",
+      "priorityScore": 90,
+      "riskLevel": "low",
+      "stage": "claiming",
+      "progress": 28,
+      "notes": [
+        "已公开认领",
+        "问题明确，仓库结构清楚",
+        "目前最像能很快推进到 PR 的一单"
+      ],
+      "nextActions": [
+        "查看 preview / draft 逻辑",
+        "优先推进到代码级修复"
       ]
     },
     {
