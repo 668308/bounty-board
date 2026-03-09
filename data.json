@@ -1,6 +1,10 @@
 {
-  "updatedAt": "2026-03-09 12:27 GMT+8",
+  "updatedAt": "2026-03-09 12:30 GMT+8",
   "timezone": "Asia/Shanghai",
+  "fx": {
+    "RTC_USD_EST": 0.05,
+    "note": "RTC estimated conservatively for dashboard display only"
+  },
   "summary": {
     "active": 1,
     "watching": 2,
@@ -16,7 +20,10 @@
     "earnings": {
       "locked": "0",
       "pending": "28 RTC",
-      "paid": "0"
+      "paid": "0",
+      "lockedUsdEst": 0,
+      "pendingUsdEst": 1.4,
+      "paidUsdEst": 0
     },
     "risk": {
       "high": 1,
@@ -32,8 +39,10 @@
         "repo": "Scottcjn/rustchain-bounties",
         "type": "Docs / API walkthrough",
         "payout": "28 RTC",
+        "payoutUsdEst": 1.4,
         "status": "Draft PR opened",
         "priority": "high",
+        "priorityScore": 95,
         "riskLevel": "high",
         "stage": "review",
         "progress": 65,
@@ -59,6 +68,7 @@
         "title": "RustChain #1494 / PR #729",
         "status": "Waiting review",
         "priority": "medium",
+        "priorityScore": 88,
         "riskLevel": "high",
         "stage": "review",
         "progress": 70,
@@ -75,8 +85,10 @@
         "repo": "Scottcjn/rustchain-bounties",
         "type": "Docs / quickstart",
         "payout": "25 RTC",
+        "payoutUsdEst": 1.25,
         "status": "Candidate",
         "priority": "medium",
+        "priorityScore": 72,
         "riskLevel": "medium",
         "stage": "candidate",
         "progress": 10,
@@ -94,8 +106,10 @@
         "repo": "Multi-source",
         "type": "USD/RMB/token mixed",
         "payout": "Varies",
+        "payoutUsdEst": 0,
         "status": "Scanning",
         "priority": "low",
+        "priorityScore": 41,
         "riskLevel": "low",
         "stage": "sourcing",
         "progress": 20,
@@ -110,6 +124,7 @@
       {
         "title": "High-collision cash bounties",
         "status": "Not prioritized",
+        "priorityScore": 5,
         "riskLevel": "high",
         "stage": "dropped",
         "progress": 100,
