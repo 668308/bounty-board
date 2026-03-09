@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-09 14:55 GMT+8",
+  "updatedAt": "2026-03-09 18:20 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -433,6 +433,36 @@
             "minimizedReason": "",
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4021336886",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87vt9tj",
+            "author": {
+              "login": "createkr"
+            },
+            "authorAssociation": "CONTRIBUTOR",
+            "body": "Submitted #1493 implementation: https://github.com/Scottcjn/Rustchain/pull/744. Payout wallet: RTC1d48d848a5aa5ecf2c5f01aa5fb64837daaf2f35 (split: createkr-wallet).",
+            "createdAt": "2026-03-09T07:46:34Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4021803875",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87vvrkc",
+            "author": {
+              "login": "Leonjiangcn"
+            },
+            "authorAssociation": "NONE",
+            "body": "## ✅ Bounty Claim\n\n**Author**: leonjiangcn\n**Date**: 2026-03-09\n**Task ID**: T09\n\nI'm claiming this bounty task.\n\n### Plan\n- [x] Claimed issue\n- [x] Created implementation branch\n- [ ] Implementation in progress\n\n**Expected completion**: Within 24-48 hours\n\nThank you! 🚀",
+            "createdAt": "2026-03-09T09:10:46Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4022253852",
             "viewerDidAuthor": false
           }
         ]
