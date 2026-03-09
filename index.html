@@ -7,43 +7,44 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #0b0d10;
-      --panel: #12161b;
-      --panel-2: #171c22;
-      --border: #232a33;
-      --text: #eef2f6;
-      --muted: #97a3b2;
-      --blue: #7fb3ff;
-      --green: #7fd1a8;
-      --amber: #e6c27a;
-      --red: #e28a96;
-      --shadow: 0 8px 24px rgba(0,0,0,.22);
-      --radius: 18px;
+      --bg: #111315;
+      --bg-soft: #161a1d;
+      --panel: #1b2025;
+      --panel-2: #20262c;
+      --border: #2c343d;
+      --text: #f3f5f7;
+      --muted: #9aa4af;
+      --blue: #8bb6ff;
+      --green: #8fd0ad;
+      --amber: #d9bd83;
+      --red: #d99aa3;
+      --shadow: 0 10px 28px rgba(0,0,0,.18);
+      --radius: 16px;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
       color: var(--text);
       line-height: 1.5;
     }
     .shell {
       max-width: 1480px;
       margin: 0 auto;
-      padding: 24px 16px 36px;
+      padding: 22px 16px 36px;
     }
     .hero {
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 24px;
+      border-radius: 20px;
       padding: 24px;
       box-shadow: var(--shadow);
     }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 16px;
+      gap: 14px;
     }
     .eyebrow {
       display: inline-block;
@@ -55,8 +56,8 @@
     }
     .title {
       margin: 10px 0 8px;
-      font-size: clamp(30px, 4vw, 44px);
-      line-height: 1.05;
+      font-size: clamp(30px, 4vw, 42px);
+      line-height: 1.08;
       letter-spacing: -.03em;
       font-weight: 800;
     }
@@ -86,9 +87,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
     }
-    .cardish {
-      padding: 16px;
-    }
+    .cardish { padding: 16px; }
     .stat-label, .mini-k, .flow-step .k, .block-title, .section-title {
       font-size: 11px;
       color: var(--muted);
@@ -139,6 +138,7 @@
       padding: 5px 9px;
       white-space: nowrap;
       border: 1px solid var(--border);
+      background: rgba(255,255,255,.02);
     }
     .pill.blue, .tag.status, .price { color: var(--blue); }
     .pill.green, .tag.low, .usd, .risk-low { color: var(--green); }
@@ -155,7 +155,7 @@
     }
     .col {
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: none;
       min-height: 360px;
     }
     .col-head {
@@ -164,6 +164,7 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,.01);
     }
     .col-title {
       display: flex;
@@ -193,6 +194,7 @@
       padding: 14px;
       margin-bottom: 12px;
       box-shadow: none;
+      background: #1d2329;
     }
     .task-top {
       display: flex;
@@ -235,9 +237,7 @@
       border-radius: 999px;
       padding: 6px 10px;
     }
-    .progress-wrap {
-      margin-top: 12px;
-    }
+    .progress-wrap { margin-top: 12px; }
     .progress-head {
       display: flex;
       justify-content: space-between;
@@ -251,24 +251,24 @@
     .bar {
       height: 8px;
       border-radius: 999px;
-      background: #0f1318;
+      background: #14181d;
       border: 1px solid var(--border);
       overflow: hidden;
     }
     .bar > span {
       display: block;
       height: 100%;
-      background: linear-gradient(90deg, #5b8ee6, #8cb6ff);
+      background: linear-gradient(90deg, #6d93d8, #98baf5);
     }
     .stage.active {
       color: var(--text);
-      border-color: #384454;
-      background: #1b2129;
+      border-color: #3a444e;
+      background: #252c33;
     }
     ul {
       margin: 8px 0 0;
       padding-left: 18px;
-      color: #cfd8e3;
+      color: #d5dbe2;
     }
     li {
       margin: 5px 0;
@@ -285,9 +285,9 @@
     }
     .claiming .dot { color: var(--amber); }
     .doing .dot { color: var(--blue); }
-    .review .dot { color: #b7a1ff; }
+    .review .dot { color: #b9a8ea; }
     .payment .dot { color: var(--green); }
-    .watching .dot { color: #8ea1b8; }
+    .watching .dot { color: #b6bec8; }
     .dropped .dot { color: var(--red); }
     @media (max-width: 1400px) {
       .board { grid-template-columns: repeat(3, minmax(240px, 1fr)); }
@@ -307,9 +307,9 @@
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">WANGCAI · BOUNTY BOARD</div>
+          <div class="eyebrow">WANGCAI · MANAGEMENT BOARD</div>
           <h1 class="title">赏金作战看板</h1>
-          <p class="subtitle">简约、清晰、能打。自动排序、收益折算、风险分级和进度流转集中展示，把最该盯的任务放在最前面。</p>
+          <p class="subtitle">保持简约，但更像老板会看的经营面板。自动排序、收益折算、风险分级与进度流转统一展示。</p>
           <div class="updated" id="updated">加载中...</div>
           <div class="stats" id="stats"></div>
           <div class="hero-bottom">
@@ -330,7 +330,7 @@
     <div class="section-title">任务流转</div>
     <section class="board" id="board"></section>
 
-    <div class="footer">当前为简约风远程看板。收益折算中的 RTC 价格仅用于内部排序参考，不代表真实成交价格。</div>
+    <div class="footer">当前为经营面板风格。RTC 的美元折算仅用于内部排序参考，不代表真实可成交价格。</div>
   </div>
 
   <script>
