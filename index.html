@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>赏金任务看板</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#0b1020; color:#e8ecf3; }
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .top { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; flex-wrap:wrap; }
+    .title { font-size: 30px; font-weight: 800; margin:0; }
+    .sub { color:#98a2b3; margin-top:8px; }
+    .stats { display:grid; grid-template-columns: repeat(4, minmax(120px,1fr)); gap:12px; width:min(100%, 620px); }
+    .stat { background:#121931; border:1px solid #24304f; border-radius:16px; padding:14px; }
+    .stat .n { font-size:26px; font-weight:800; }
+    .stat .k { color:#9fb0d0; font-size:13px; }
+    .board { margin-top:24px; display:grid; grid-template-columns: repeat(6, minmax(220px,1fr)); gap:16px; }
+    .col { background:#10172c; border:1px solid #24304f; border-radius:18px; padding:14px; min-height:320px; }
+    .col h2 { margin:0 0 12px; font-size:16px; }
+    .card { background:#151f39; border:1px solid #2b3a63; border-radius:14px; padding:12px; margin-bottom:12px; }
+    .card h3 { margin:0 0 8px; font-size:15px; }
+    .meta { color:#9fb0d0; font-size:12px; line-height:1.5; }
+    .tag { display:inline-block; padding:3px 8px; border-radius:999px; font-size:12px; font-weight:700; margin-top:8px; background:#1f2b4d; color:#c8d5f0; }
+    .tag.high { background:#4a1f2a; color:#ffb4c2; }
+    .links a { color:#84b6ff; text-decoration:none; margin-right:10px; font-size:12px; }
+    ul { padding-left:18px; margin:10px 0 0; color:#d4dbeb; }
+    li { margin:4px 0; font-size:13px; }
+    .foot { margin-top:20px; color:#7f8ba3; font-size:12px; }
+    @media (max-width: 1200px) { .board { grid-template-columns: repeat(3, minmax(220px,1fr)); } }
+    @media (max-width: 760px) { .board { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1 class="title">赏金任务看板</h1>
+        <div class="sub" id="updated">加载中...</div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="board" id="board"></div>
+    <div class="foot">说明：这是旺财给主人的赏金任务作战板。当前为静态版，后面可以继续接自动刷新、远程访问、GitHub 实时同步。</div>
+  </div>
+
+  <script>
+    const titles = {
+      claiming: '正在抢',
+      doing: '正在做',
+      review: '等 Review',
+      payment: '等付款',
+      watching: '候选 / 观察',
+      dropped: '已放弃'
+    };
+
+    function renderCard(item) {
+      return `
+        <div class="card">
+          <h3>${item.title || ''}</h3>
+          <div class="meta">
+            ${item.repo ? `<div>仓库：${item.repo}</div>` : ''}
+            ${item.type ? `<div>类型：${item.type}</div>` : ''}
+            ${item.payout ? `<div>赏金：${item.payout}</div>` : ''}
+            ${item.status ? `<div>状态：${item.status}</div>` : ''}
+            ${item.ownerRisk ? `<div>风险：${item.ownerRisk}</div>` : ''}
+          </div>
+          ${item.priority ? `<div class="tag ${item.priority}">${item.priority.toUpperCase()}</div>` : ''}
+          ${item.links ? `<div class="links" style="margin-top:10px;">${Object.entries(item.links).map(([k,v])=>`<a href="${v}" target="_blank">${k}</a>`).join('')}</div>` : ''}
+          ${item.notes?.length ? `<ul>${item.notes.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
+          ${item.nextActions?.length ? `<ul>${item.nextActions.map(x=>`<li>➡ ${x}</li>`).join('')}</ul>` : ''}
+        </div>`;
+    }
+
+    fetch('./data.json').then(r => r.json()).then(data => {
+      document.getElementById('updated').textContent = `更新时间：${data.updatedAt} · 时区：${data.timezone}`;
+      document.getElementById('stats').innerHTML = `
+        <div class="stat"><div class="n">${data.summary.active}</div><div class="k">Active</div></div>
+        <div class="stat"><div class="n">${data.summary.watching}</div><div class="k">Watching</div></div>
+        <div class="stat"><div class="n">${data.summary.waitingReview}</div><div class="k">Waiting Review</div></div>
+        <div class="stat"><div class="n">${data.summary.waitingPayment}</div><div class="k">Waiting Payment</div></div>`;
+
+      document.getElementById('board').innerHTML = Object.entries(titles).map(([key, title]) => `
+        <section class="col">
+          <h2>${title}</h2>
+          ${(data.columns[key] || []).map(renderCard).join('') || '<div class="meta">暂无</div>'}
+        </section>`).join('');
+    }).catch(err => {
+      document.getElementById('updated').textContent = '加载失败：' + err;
+    });
+  </script>
+</body>
+</html>
