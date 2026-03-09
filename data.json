@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-09 18:47 GMT+8",
+  "updatedAt": "2026-03-09 19:17 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -463,6 +463,21 @@
             "minimizedReason": "",
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4022253852",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87vyCPN",
+            "author": {
+              "login": "yanjuan99"
+            },
+            "authorAssociation": "NONE",
+            "body": "## Claim: Start Here Quickstart\n\nI've created a comprehensive quickstart guide covering all three paths:\n\n**📄 Gist**: https://gist.github.com/yanjuan99/d3344c84f78b702d4defff199b54433f\n\n### What's Included\n\n- **👛 Wallet / User Path**: Create wallet ID, check balance, get RTC\n- **⛏️ Miner Path**: One-line install, status checks, hardware multipliers\n- **💻 Developer Path**: API reference, tested commands, contribution guide\n\n### Acceptance Criteria Met\n\n- ✅ Wallet, miner, and developer paths covered\n- ✅ Commands tested against live node (`50.28.86.131`)\n- ✅ Wallet-ID vs external-address distinction explicit (prominent warning section)\n- ✅ Self-signed certificate caveats documented\n- ✅ Links to bounty hub, explorer, and API endpoints\n\n### Implementation Notes\n\n- All curl commands tested and verified working\n- Added `-sk` flag explanations for self-signed cert handling\n- Included bridge info for wRTC on Solana and Base\n- Kept it concise per the \"not a docs dump\" requirement\n\nReady for PR to add as `START_HERE.md` in main repo with README link.\n\n**Wallet**: `yanjuan99`\n\nRef: Scottcjn/Rustchain#700",
+            "createdAt": "2026-03-09T10:51:56Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4022870989",
             "viewerDidAuthor": false
           }
         ]
