@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-09 20:48 GMT+8",
+  "updatedAt": "2026-03-09 21:17 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -760,6 +760,21 @@
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4023131864",
             "viewerDidAuthor": true
+          },
+          {
+            "id": "IC_kwDORGgqa87v0s5R",
+            "author": {
+              "login": "whitebrendan"
+            },
+            "authorAssociation": "NONE",
+            "body": "## Claiming Bounty #1490 - clawtc wallet show fix\n\nI have reviewed the logic for the `clawrtc wallet show` fix in PR #736 and am ready to submit my own hardened version that includes **regression tests** to ensure this false offline state doesn't return in future releases.\n\nMy implementation handles:\n- Graceful failover to secondary nodes if the primary endpoint returns 404/500.\n- Correct parsing of `amount_rtc` vs legacy fields.\n- Integrated unit tests for the wallet display component.\n\n**Miner ID:** `whitebrendan`",
+            "createdAt": "2026-03-09T12:57:28Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4023570001",
+            "viewerDidAuthor": false
           }
         ]
       },
