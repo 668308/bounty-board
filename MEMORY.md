@@ -15,3 +15,5 @@
   - Solana: `7dZfZbz4TxjLaEpLmwZnt6Pxin7sjRagrwKEr9REMhtW`
   - BTC: `bc1pf6w552pj9ln2eku6xp26pmp3ulzhahruvwssn8c42d6kxc3qt43s0sycla`
 - USD/RMB payout method should be selected later based on the payer/platform and withdrawal context.
+- User always uses Beijing time.
+- User wants a daily summary of bounty-task progress at 22:00 Beijing time.
