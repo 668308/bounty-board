@@ -3,49 +3,331 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>赏金任务看板</title>
+  <title>旺财 · 赏金任务看板</title>
   <style>
-    :root { color-scheme: dark; }
-    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#0b1020; color:#e8ecf3; }
-    .wrap { max-width: 1400px; margin: 0 auto; padding: 24px; }
-    .top { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; flex-wrap:wrap; }
-    .title { font-size: 30px; font-weight: 800; margin:0; }
-    .sub { color:#98a2b3; margin-top:8px; }
-    .stats { display:grid; grid-template-columns: repeat(4, minmax(120px,1fr)); gap:12px; width:min(100%, 620px); }
-    .stat { background:#121931; border:1px solid #24304f; border-radius:16px; padding:14px; }
-    .stat .n { font-size:26px; font-weight:800; }
-    .stat .k { color:#9fb0d0; font-size:13px; }
-    .board { margin-top:24px; display:grid; grid-template-columns: repeat(6, minmax(220px,1fr)); gap:16px; }
-    .col { background:#10172c; border:1px solid #24304f; border-radius:18px; padding:14px; min-height:320px; }
-    .col h2 { margin:0 0 12px; font-size:16px; }
-    .card { background:#151f39; border:1px solid #2b3a63; border-radius:14px; padding:12px; margin-bottom:12px; }
-    .card h3 { margin:0 0 8px; font-size:15px; }
-    .meta { color:#9fb0d0; font-size:12px; line-height:1.5; }
-    .tag { display:inline-block; padding:3px 8px; border-radius:999px; font-size:12px; font-weight:700; margin-top:8px; background:#1f2b4d; color:#c8d5f0; }
-    .tag.high { background:#4a1f2a; color:#ffb4c2; }
-    .links a { color:#84b6ff; text-decoration:none; margin-right:10px; font-size:12px; }
-    ul { padding-left:18px; margin:10px 0 0; color:#d4dbeb; }
-    li { margin:4px 0; font-size:13px; }
-    .foot { margin-top:20px; color:#7f8ba3; font-size:12px; }
-    @media (max-width: 1200px) { .board { grid-template-columns: repeat(3, minmax(220px,1fr)); } }
-    @media (max-width: 760px) { .board { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2,1fr); } }
+    :root {
+      color-scheme: dark;
+      --bg: #07111f;
+      --bg2: #0c1729;
+      --panel: rgba(16, 25, 49, 0.78);
+      --panel-2: rgba(21, 31, 57, 0.92);
+      --line: rgba(104, 130, 184, 0.22);
+      --text: #edf2ff;
+      --muted: #94a3b8;
+      --blue: #60a5fa;
+      --cyan: #22d3ee;
+      --green: #34d399;
+      --amber: #fbbf24;
+      --red: #fb7185;
+      --violet: #a78bfa;
+      --shadow: 0 10px 30px rgba(0,0,0,.28);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(34,211,238,.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(96,165,250,.16), transparent 32%),
+        linear-gradient(180deg, #08101d 0%, #0a1322 45%, #08101b 100%);
+      min-height: 100vh;
+    }
+    .shell {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(17,24,39,.88), rgba(14,25,47,.92));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -100px auto;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(96,165,250,.18), transparent 60%);
+      pointer-events: none;
+    }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(96,165,250,.24);
+      background: rgba(96,165,250,.08);
+      color: #cfe0ff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .title {
+      margin: 14px 0 8px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.02;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+    .subtitle {
+      margin: 0;
+      color: #a5b4cf;
+      max-width: 760px;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    .updated {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(130px, 1fr));
+      gap: 12px;
+      width: min(100%, 620px);
+    }
+    .stat {
+      background: linear-gradient(180deg, rgba(19,29,55,.82), rgba(14,23,43,.95));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+      min-height: 102px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .stat .k {
+      font-size: 12px;
+      color: #91a2c3;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-weight: 700;
+    }
+    .stat .n {
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+    .stat .hint {
+      color: #7f90ae;
+      font-size: 12px;
+    }
+    .board {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(240px, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+    .col {
+      background: linear-gradient(180deg, rgba(14,24,45,.8), rgba(10,18,34,.96));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      min-height: 360px;
+      overflow: hidden;
+    }
+    .col-head {
+      padding: 14px 14px 12px;
+      border-bottom: 1px solid rgba(104,130,184,.16);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+    }
+    .col-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 18px currentColor;
+    }
+    .count {
+      min-width: 26px;
+      height: 26px;
+      padding: 0 8px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #dbe7ff;
+      background: rgba(96,165,250,.12);
+      border: 1px solid rgba(96,165,250,.18);
+    }
+    .cards {
+      padding: 12px;
+    }
+    .empty {
+      color: #7f8da8;
+      font-size: 13px;
+      padding: 12px;
+      border: 1px dashed rgba(104,130,184,.22);
+      border-radius: 16px;
+      background: rgba(255,255,255,.02);
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(24,35,64,.92), rgba(18,28,50,.98));
+      border: 1px solid rgba(123,154,216,.16);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--blue), var(--cyan));
+      opacity: .85;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      padding-left: 4px;
+    }
+    .meta {
+      display: grid;
+      gap: 5px;
+      color: #9eb0cf;
+      font-size: 12px;
+      line-height: 1.5;
+      padding-left: 4px;
+    }
+    .meta strong { color: #dce7ff; font-weight: 700; }
+    .tag-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-left: 4px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+    }
+    .tag.high { background: rgba(251,113,133,.12); color: #ffb8c4; border-color: rgba(251,113,133,.18); }
+    .tag.medium { background: rgba(251,191,36,.12); color: #ffd976; border-color: rgba(251,191,36,.18); }
+    .tag.low { background: rgba(52,211,153,.12); color: #95f0c7; border-color: rgba(52,211,153,.18); }
+    .tag.status { background: rgba(96,165,250,.12); color: #c7dcff; border-color: rgba(96,165,250,.18); }
+    .links {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-left: 4px;
+    }
+    .links a {
+      text-decoration: none;
+      color: #cfe2ff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 10px;
+      border-radius: 10px;
+      background: rgba(96,165,250,.1);
+      border: 1px solid rgba(96,165,250,.16);
+    }
+    .links a:hover { background: rgba(96,165,250,.16); }
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: #d8e1f1;
+    }
+    li {
+      margin: 5px 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .footer {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(12,21,38,.78);
+      border: 1px solid var(--line);
+      color: #8ea0bf;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .claiming .dot { color: var(--amber); background: var(--amber); }
+    .doing .dot { color: var(--cyan); background: var(--cyan); }
+    .review .dot { color: var(--violet); background: var(--violet); }
+    .payment .dot { color: var(--green); background: var(--green); }
+    .watching .dot { color: var(--blue); background: var(--blue); }
+    .dropped .dot { color: var(--red); background: var(--red); }
+    @media (max-width: 1380px) { .board { grid-template-columns: repeat(3, minmax(260px, 1fr)); } }
+    @media (max-width: 860px) {
+      .shell { padding: 16px 14px 30px; }
+      .hero { padding: 18px; border-radius: 22px; }
+      .stats { grid-template-columns: repeat(2, minmax(120px,1fr)); width:100%; }
+      .board { grid-template-columns: 1fr; }
+      .title { font-size: 32px; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div>
-        <h1 class="title">赏金任务看板</h1>
-        <div class="sub" id="updated">加载中...</div>
+  <div class="shell">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="eyebrow">🐶 旺财作战系统</div>
+          <h1 class="title">赏金任务看板</h1>
+          <p class="subtitle">给主人盯 GitHub bounty、认领、PR、Review、付款进度。目标不是显得忙，是把钱真正落袋。</p>
+          <div class="updated" id="updated">加载中...</div>
+        </div>
+        <div class="stats" id="stats"></div>
       </div>
-      <div class="stats" id="stats"></div>
+    </section>
+
+    <section class="board" id="board"></section>
+
+    <div class="footer">
+      当前为公开远程看板。展示的是主人这边的赏金任务状态、候选目标和推进节奏。后面还能继续加：GitHub 实时联动、Review 计数、付款记录、日报同步更新。
     </div>
-    <div class="board" id="board"></div>
-    <div class="foot">说明：这是旺财给主人的赏金任务作战板。当前为静态版，后面可以继续接自动刷新、远程访问、GitHub 实时同步。</div>
   </div>
 
   <script>
-    const titles = {
+    const columns = {
       claiming: '正在抢',
       doing: '正在做',
       review: '等 Review',
@@ -54,40 +336,90 @@
       dropped: '已放弃'
     };
 
-    function renderCard(item) {
-      return `
-        <div class="card">
-          <h3>${item.title || ''}</h3>
-          <div class="meta">
-            ${item.repo ? `<div>仓库：${item.repo}</div>` : ''}
-            ${item.type ? `<div>类型：${item.type}</div>` : ''}
-            ${item.payout ? `<div>赏金：${item.payout}</div>` : ''}
-            ${item.status ? `<div>状态：${item.status}</div>` : ''}
-            ${item.ownerRisk ? `<div>风险：${item.ownerRisk}</div>` : ''}
-          </div>
-          ${item.priority ? `<div class="tag ${item.priority}">${item.priority.toUpperCase()}</div>` : ''}
-          ${item.links ? `<div class="links" style="margin-top:10px;">${Object.entries(item.links).map(([k,v])=>`<a href="${v}" target="_blank">${k}</a>`).join('')}</div>` : ''}
-          ${item.notes?.length ? `<ul>${item.notes.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
-          ${item.nextActions?.length ? `<ul>${item.nextActions.map(x=>`<li>➡ ${x}</li>`).join('')}</ul>` : ''}
-        </div>`;
+    const statMeta = [
+      ['active', 'Active', '当前推进中'],
+      ['watching', 'Watching', '观察和备选'],
+      ['waitingReview', 'Review', '等待维护者动作'],
+      ['waitingPayment', 'Payment', '等收款']
+    ];
+
+    function esc(v='') {
+      return String(v)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
     }
 
-    fetch('./data.json').then(r => r.json()).then(data => {
-      document.getElementById('updated').textContent = `更新时间：${data.updatedAt} · 时区：${data.timezone}`;
-      document.getElementById('stats').innerHTML = `
-        <div class="stat"><div class="n">${data.summary.active}</div><div class="k">Active</div></div>
-        <div class="stat"><div class="n">${data.summary.watching}</div><div class="k">Watching</div></div>
-        <div class="stat"><div class="n">${data.summary.waitingReview}</div><div class="k">Waiting Review</div></div>
-        <div class="stat"><div class="n">${data.summary.waitingPayment}</div><div class="k">Waiting Payment</div></div>`;
+    function renderTags(item) {
+      const tags = [];
+      if (item.priority) tags.push(`<span class="tag ${esc(item.priority)}">${esc(item.priority)}</span>`);
+      if (item.status) tags.push(`<span class="tag status">${esc(item.status)}</span>`);
+      return tags.length ? `<div class="tag-row">${tags.join('')}</div>` : '';
+    }
 
-      document.getElementById('board').innerHTML = Object.entries(titles).map(([key, title]) => `
-        <section class="col">
-          <h2>${title}</h2>
-          ${(data.columns[key] || []).map(renderCard).join('') || '<div class="meta">暂无</div>'}
-        </section>`).join('');
-    }).catch(err => {
-      document.getElementById('updated').textContent = '加载失败：' + err;
-    });
+    function renderMeta(item) {
+      const rows = [
+        item.repo && `<div><strong>仓库：</strong>${esc(item.repo)}</div>`,
+        item.type && `<div><strong>类型：</strong>${esc(item.type)}</div>`,
+        item.payout && `<div><strong>赏金：</strong>${esc(item.payout)}</div>`,
+        item.ownerRisk && `<div><strong>风险：</strong>${esc(item.ownerRisk)}</div>`
+      ].filter(Boolean);
+      return rows.length ? `<div class="meta">${rows.join('')}</div>` : '';
+    }
+
+    function renderLinks(item) {
+      if (!item.links) return '';
+      const html = Object.entries(item.links).map(([k,v]) => `<a href="${esc(v)}" target="_blank" rel="noopener noreferrer">${esc(k)}</a>`).join('');
+      return html ? `<div class="links">${html}</div>` : '';
+    }
+
+    function renderList(items, prefix='') {
+      return items?.length ? `<ul>${items.map(x => `<li>${prefix}${esc(x)}</li>`).join('')}</ul>` : '';
+    }
+
+    function renderCard(item) {
+      return `
+        <article class="card">
+          <h3>${esc(item.title || '')}</h3>
+          ${renderMeta(item)}
+          ${renderTags(item)}
+          ${renderLinks(item)}
+          ${renderList(item.notes)}
+          ${renderList(item.nextActions, '➡ ')}
+        </article>`;
+    }
+
+    fetch('./data.json')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('updated').textContent = `更新时间：${data.updatedAt} · 时区：${data.timezone}`;
+
+        document.getElementById('stats').innerHTML = statMeta.map(([key,label,hint]) => `
+          <div class="stat">
+            <div class="k">${label}</div>
+            <div class="n">${data.summary[key] ?? 0}</div>
+            <div class="hint">${hint}</div>
+          </div>`).join('');
+
+        document.getElementById('board').innerHTML = Object.entries(columns).map(([key, title]) => {
+          const items = data.columns?.[key] || [];
+          return `
+            <section class="col ${key}">
+              <div class="col-head">
+                <div class="col-title"><span class="dot"></span>${title}</div>
+                <span class="count">${items.length}</span>
+              </div>
+              <div class="cards">
+                ${items.length ? items.map(renderCard).join('') : '<div class="empty">暂无任务</div>'}
+              </div>
+            </section>`;
+        }).join('');
+      })
+      .catch(err => {
+        document.getElementById('updated').textContent = '加载失败：' + err;
+      });
   </script>
 </body>
 </html>
