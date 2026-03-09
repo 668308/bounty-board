@@ -1,0 +1,87 @@
+{
+  "fx": {
+    "RTC_USD_EST": 0.05,
+    "note": "RTC estimated conservatively for dashboard display only"
+  },
+  "tasks": [
+    {
+      "title": "RustChain bounty #1494",
+      "repo": "Scottcjn/rustchain-bounties",
+      "issueNumber": 1494,
+      "type": "Docs / API walkthrough",
+      "payout": "28 RTC",
+      "payoutUsdEst": 1.4,
+      "priority": "high",
+      "priorityScore": 95,
+      "riskLevel": "high",
+      "stage": "review",
+      "progress": 65,
+      "linkedPrs": [
+        {
+          "repo": "Scottcjn/Rustchain",
+          "number": 729
+        }
+      ],
+      "notes": [
+        "已发 claim",
+        "已 fork / 开分支 / 提交第一版修正",
+        "已在 bounty issue 回进度",
+        "关键修正：RTC 地址格式 + signed transfer 签名格式对齐真实后端"
+      ],
+      "nextActions": [
+        "继续盯 maintainer review",
+        "如有反馈，快速迭代 PR",
+        "争取 merge 后确认 bounty 归属"
+      ]
+    },
+    {
+      "title": "RustChain bounty #1493",
+      "repo": "Scottcjn/rustchain-bounties",
+      "issueNumber": 1493,
+      "type": "Docs / quickstart",
+      "payout": "25 RTC",
+      "payoutUsdEst": 1.25,
+      "priority": "medium",
+      "priorityScore": 72,
+      "riskLevel": "medium",
+      "stage": "candidate",
+      "progress": 10,
+      "notes": [
+        "比 1494 碰撞略小",
+        "依然是 RTC 支付",
+        "如果要抢，最好直接开 draft PR 而不是空口 claim"
+      ]
+    },
+    {
+      "title": "Open public bounty scan",
+      "repo": "Multi-source",
+      "type": "USD/RMB/token mixed",
+      "payout": "Varies",
+      "payoutUsdEst": 0,
+      "priority": "low",
+      "priorityScore": 41,
+      "riskLevel": "low",
+      "stage": "sourcing",
+      "progress": 20,
+      "notes": [
+        "持续筛选低复杂度、可快速交付的赏金任务",
+        "优先真实 payout、低碰撞、可落袋",
+        "token 单接受，但会过滤空气单"
+      ]
+    }
+  ],
+  "dropped": [
+    {
+      "title": "High-collision cash bounties",
+      "status": "Not prioritized",
+      "priorityScore": 5,
+      "riskLevel": "high",
+      "stage": "dropped",
+      "progress": 100,
+      "notes": [
+        "高竞争但 payout 清晰的单子很多已经卷烂",
+        "当前优先做更可落地、更容易成交的任务"
+      ]
+    }
+  ]
+}
