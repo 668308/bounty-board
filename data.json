@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-09 15:24 GMT+8",
+  "updatedAt": "2026-03-09 15:57 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -433,6 +433,21 @@
             "minimizedReason": "",
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4021336886",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87vt9tj",
+            "author": {
+              "login": "createkr"
+            },
+            "authorAssociation": "CONTRIBUTOR",
+            "body": "Submitted #1493 implementation: https://github.com/Scottcjn/Rustchain/pull/744. Payout wallet: RTC1d48d848a5aa5ecf2c5f01aa5fb64837daaf2f35 (split: createkr-wallet).",
+            "createdAt": "2026-03-09T07:46:34Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4021803875",
             "viewerDidAuthor": false
           }
         ]
