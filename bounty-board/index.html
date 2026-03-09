@@ -7,124 +7,37 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #060c18;
-      --panel: rgba(13, 21, 39, 0.84);
-      --panel-2: rgba(18, 28, 50, 0.95);
-      --line: rgba(125, 152, 203, 0.18);
-      --text: #edf3ff;
-      --muted: #90a0be;
-      --blue: #60a5fa;
-      --cyan: #22d3ee;
-      --green: #34d399;
-      --amber: #fbbf24;
-      --red: #fb7185;
-      --violet: #a78bfa;
-      --shadow: 0 16px 42px rgba(0,0,0,.32);
-      --radius: 24px;
+      --text:#eef4ff; --muted:#8ea0c2; --line:rgba(124,152,205,.18);
+      --bg1:#050a14; --bg2:#08111f; --bg3:#0a1527;
+      --blue:#60a5fa; --cyan:#22d3ee; --green:#34d399; --amber:#fbbf24; --red:#fb7185; --violet:#a78bfa;
+      --shadow:0 20px 50px rgba(0,0,0,.34); --radius:26px;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 0% 0%, rgba(34,211,238,.10), transparent 25%),
-        radial-gradient(circle at 100% 0%, rgba(96,165,250,.12), transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(167,139,250,.10), transparent 24%),
-        linear-gradient(180deg, #050b16 0%, #08101d 55%, #050b14 100%);
-      min-height: 100vh;
-    }
-    .shell { max-width: 1540px; margin: 0 auto; padding: 24px 18px 38px; }
-    .hero {
-      position: relative; overflow: hidden; border-radius: 30px; box-shadow: var(--shadow);
-      border: 1px solid var(--line); background: linear-gradient(135deg, rgba(12,18,33,.94), rgba(14,25,46,.96));
-      padding: 24px;
-    }
-    .hero::before { content:""; position:absolute; inset:-30% auto auto -10%; width:380px; height:380px; background:radial-gradient(circle, rgba(34,211,238,.10), transparent 60%); }
-    .hero::after { content:""; position:absolute; inset:auto -6% -35% auto; width:380px; height:380px; background:radial-gradient(circle, rgba(96,165,250,.14), transparent 60%); }
-    .hero-grid { display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; position:relative; z-index:1; }
-    .eyebrow { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid rgba(96,165,250,.2); background:rgba(96,165,250,.08); color:#d6e5ff; font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
-    .title { margin:14px 0 8px; font-size:clamp(34px,4vw,54px); line-height:1; letter-spacing:-.04em; font-weight:950; }
-    .subtitle { margin:0; max-width:780px; color:#a5b3cc; font-size:15px; line-height:1.7; }
-    .updated { margin-top:14px; color:var(--muted); font-size:13px; }
-    .stats { margin-top:18px; display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:12px; }
-    .stat-card, .side-card, .mini-panel { border-radius:22px; padding:16px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); }
-    .stat-label { color:#9aabc8; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
-    .stat-value { margin-top:8px; font-size:30px; font-weight:900; letter-spacing:-.03em; }
-    .stat-small { margin-top:8px; color:#8092b0; font-size:12px; line-height:1.5; }
-    .hero-side { display:grid; gap:12px; }
-    .side-card h3, .mini-panel h3 { margin:0 0 10px; font-size:14px; color:#dce8ff; }
-    .side-list { display:grid; gap:10px; }
-    .side-item { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:14px; background:rgba(255,255,255,.03); border:1px solid rgba(125,152,203,.12); }
-    .side-item .name { font-size:13px; font-weight:700; }
-    .side-item .desc { margin-top:4px; color:#8fa1be; font-size:12px; }
-    .pill { display:inline-flex; align-items:center; justify-content:center; min-width:60px; padding:6px 8px; border-radius:999px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; border:1px solid transparent; }
-    .pill.green { background:rgba(52,211,153,.12); color:#9cf0cb; border-color:rgba(52,211,153,.18); }
-    .pill.blue { background:rgba(96,165,250,.12); color:#d3e6ff; border-color:rgba(96,165,250,.18); }
-    .pill.amber { background:rgba(251,191,36,.12); color:#ffdc88; border-color:rgba(251,191,36,.18); }
-    .pill.red { background:rgba(251,113,133,.12); color:#ffbac6; border-color:rgba(251,113,133,.18); }
-    .hero-bottom { margin-top:14px; display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    .flow { display:flex; gap:10px; flex-wrap:wrap; }
-    .flow-step { flex:1 1 110px; min-width:110px; border-radius:16px; padding:12px; background:rgba(255,255,255,.03); border:1px solid rgba(125,152,203,.12); }
-    .flow-step .n { font-size:22px; font-weight:900; margin-top:6px; }
-    .flow-step .k { font-size:11px; color:#97a8c5; text-transform:uppercase; letter-spacing:.06em; }
-    .earn-grid, .risk-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
-    .mini { border-radius:14px; padding:12px; background:rgba(255,255,255,.03); border:1px solid rgba(125,152,203,.12); }
-    .mini .k { font-size:11px; color:#96a8c6; text-transform:uppercase; letter-spacing:.06em; }
-    .mini .v { margin-top:8px; font-size:18px; font-weight:900; }
-    .section-title { margin:22px 2px 12px; color:#d9e6ff; font-size:13px; letter-spacing:.08em; text-transform:uppercase; font-weight:800; }
-    .board { display:grid; grid-template-columns: repeat(6, minmax(240px, 1fr)); gap:16px; align-items:start; }
-    .col { border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow); background: linear-gradient(180deg, rgba(12,20,37,.84), rgba(9,17,31,.98)); border:1px solid var(--line); min-height: 390px; }
-    .col-head { padding:14px 14px 12px; display:flex; justify-content:space-between; align-items:center; gap:12px; border-bottom:1px solid rgba(125,152,203,.14); background:linear-gradient(180deg, rgba(255,255,255,.03), transparent); }
-    .col-title { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:850; }
-    .dot { width:10px; height:10px; border-radius:50%; box-shadow:0 0 18px currentColor; }
-    .count { min-width:28px; height:28px; border-radius:999px; padding:0 9px; display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,.04); color:#dbe7ff; border:1px solid rgba(125,152,203,.16); font-size:12px; font-weight:900; }
-    .cards { padding:12px; }
-    .empty { padding:12px; border-radius:16px; border:1px dashed rgba(125,152,203,.20); color:#8091af; font-size:13px; background:rgba(255,255,255,.02); }
-    .card { position:relative; overflow:hidden; margin-bottom:12px; border-radius:18px; border:1px solid rgba(125,152,203,.15); background: linear-gradient(180deg, rgba(22,34,61,.94), rgba(16,26,46,.98)); padding:14px; }
-    .card::before { content:""; position:absolute; inset:0 auto 0 0; width:3px; background:linear-gradient(180deg, var(--blue), var(--cyan)); opacity:.9; }
-    .card-top { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
-    .card h3 { margin:0; font-size:15px; line-height:1.35; font-weight:850; letter-spacing:-.01em; padding-left:4px; }
-    .price { font-size:12px; font-weight:900; color:#d8e8ff; padding:6px 8px; border-radius:10px; background:rgba(96,165,250,.10); border:1px solid rgba(96,165,250,.14); white-space:nowrap; }
-    .meta { margin-top:8px; display:grid; gap:5px; color:#9eb0cf; font-size:12px; line-height:1.5; padding-left:4px; }
-    .meta strong { color:#dce8ff; }
-    .tag-row, .links { margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; padding-left:4px; }
-    .tag { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; font-size:11px; font-weight:850; text-transform:uppercase; letter-spacing:.04em; border:1px solid transparent; }
-    .tag.high { background:rgba(251,113,133,.12); color:#ffb8c4; border-color:rgba(251,113,133,.18); }
-    .tag.medium { background:rgba(251,191,36,.12); color:#ffdc88; border-color:rgba(251,191,36,.18); }
-    .tag.low { background:rgba(52,211,153,.12); color:#97efc8; border-color:rgba(52,211,153,.18); }
-    .tag.status { background:rgba(96,165,250,.12); color:#c7dcff; border-color:rgba(96,165,250,.18); }
-    .risk-badge { font-size:11px; font-weight:900; text-transform:uppercase; padding:5px 8px; border-radius:999px; }
-    .risk-high { color:#ffb8c4; background:rgba(251,113,133,.12); }
-    .risk-medium { color:#ffdc88; background:rgba(251,191,36,.12); }
-    .risk-low { color:#97efc8; background:rgba(52,211,153,.12); }
-    .links a { text-decoration:none; color:#d5e6ff; font-size:12px; font-weight:800; padding:7px 10px; border-radius:10px; background:rgba(96,165,250,.10); border:1px solid rgba(96,165,250,.16); }
-    .progress-wrap { margin-top:12px; padding-left:4px; }
-    .progress-head { display:flex; justify-content:space-between; gap:8px; color:#97a8c6; font-size:11px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
-    .bar { height:8px; border-radius:999px; background:rgba(255,255,255,.05); overflow:hidden; border:1px solid rgba(125,152,203,.10); }
-    .bar > span { display:block; height:100%; border-radius:999px; background:linear-gradient(90deg, var(--blue), var(--cyan)); }
-    .stage-row { margin-top:12px; display:flex; gap:6px; flex-wrap:wrap; padding-left:4px; }
-    .stage { font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:.05em; padding:5px 7px; border-radius:999px; background:rgba(255,255,255,.04); color:#94a4c0; border:1px solid rgba(125,152,203,.12); }
-    .stage.active { color:#dce8ff; background:rgba(96,165,250,.12); border-color:rgba(96,165,250,.18); }
-    .block-title { margin-top:12px; padding-left:4px; color:#8fa3c7; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
-    ul { margin:8px 0 0; padding-left:22px; color:#d8e1f2; }
-    li { margin:5px 0; font-size:13px; line-height:1.52; }
-    .footer { margin-top:18px; padding:14px 16px; border-radius:18px; border:1px solid var(--line); background:rgba(10,18,34,.82); color:#8fa1be; font-size:12px; line-height:1.65; }
-    .claiming .dot { color: var(--amber); background: var(--amber); }
-    .doing .dot { color: var(--cyan); background: var(--cyan); }
-    .review .dot { color: var(--violet); background: var(--violet); }
-    .payment .dot { color: var(--green); background: var(--green); }
-    .watching .dot { color: var(--blue); background: var(--blue); }
-    .dropped .dot { color: var(--red); background: var(--red); }
-    @media (max-width: 1400px) { .board { grid-template-columns: repeat(3, minmax(260px,1fr)); } .hero-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 860px) {
-      .shell { padding: 16px 12px 28px; }
-      .hero { padding: 18px; border-radius: 22px; }
-      .stats, .earn-grid, .risk-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-bottom { grid-template-columns: 1fr; }
-      .board { grid-template-columns: 1fr; }
-      .title { font-size: 34px; }
-    }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--text);
+      background:radial-gradient(circle at 0% 0%, rgba(34,211,238,.11), transparent 24%),radial-gradient(circle at 100% 0%, rgba(96,165,250,.13), transparent 28%),radial-gradient(circle at 50% 100%, rgba(167,139,250,.12), transparent 22%),linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);min-height:100vh}
+    .shell{max-width:1560px;margin:0 auto;padding:22px 16px 38px}
+    .hero{position:relative;overflow:hidden;border-radius:32px;border:1px solid var(--line);box-shadow:var(--shadow);padding:24px;background:linear-gradient(135deg,rgba(12,19,34,.95),rgba(14,24,46,.97))}
+    .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(12px)}
+    .hero:before{width:340px;height:340px;left:-110px;top:-130px;background:radial-gradient(circle,rgba(34,211,238,.12),transparent 60%)}
+    .hero:after{width:360px;height:360px;right:-120px;bottom:-170px;background:radial-gradient(circle,rgba(96,165,250,.14),transparent 60%)}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.18);font-size:12px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:#dbe8ff}
+    .title{margin:14px 0 10px;font-size:clamp(34px,4vw,56px);line-height:1;letter-spacing:-.045em;font-weight:950}
+    .subtitle{margin:0;max-width:760px;color:#a4b4d0;font-size:15px;line-height:1.72}.updated{margin-top:14px;color:var(--muted);font-size:13px}
+    .stats{margin-top:18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.cardish{border-radius:22px;padding:16px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015))}
+    .stat-label,.mini-k{font-size:11px;color:#99aace;text-transform:uppercase;letter-spacing:.06em;font-weight:800}.stat-value{margin-top:8px;font-size:30px;font-weight:950;letter-spacing:-.04em}.stat-small{margin-top:8px;color:#8093b5;font-size:12px;line-height:1.45}
+    .hero-side,.stack{display:grid;gap:12px}.side-card h3,.mini-panel h3{margin:0 0 10px;font-size:14px;color:#deebff}.side-list{display:grid;gap:10px}
+    .side-item{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(124,152,205,.12)} .side-item .name{font-size:13px;font-weight:800}.side-item .desc{margin-top:4px;color:#8ea1c1;font-size:12px;line-height:1.45}
+    .pill{display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:6px 8px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;border:1px solid transparent}.pill.green{background:rgba(52,211,153,.12);color:#9cf0cb;border-color:rgba(52,211,153,.18)}.pill.blue{background:rgba(96,165,250,.12);color:#d3e6ff;border-color:rgba(96,165,250,.18)}.pill.amber{background:rgba(251,191,36,.12);color:#ffdc88;border-color:rgba(251,191,36,.18)}.pill.red{background:rgba(251,113,133,.12);color:#ffbac6;border-color:rgba(251,113,133,.18)}
+    .hero-bottom{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.flow{display:flex;gap:10px;flex-wrap:wrap}.flow-step{flex:1 1 110px;min-width:110px;padding:12px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(124,152,205,.12)}.flow-step .k{font-size:11px;color:#97a8c6;text-transform:uppercase;letter-spacing:.06em}.flow-step .n{margin-top:6px;font-size:22px;font-weight:950}
+    .triple{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.mini{padding:12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(124,152,205,.12)}.mini-v{margin-top:8px;font-size:18px;font-weight:950}.mini-sub{margin-top:4px;color:#7f92b3;font-size:11px}
+    .section-title{margin:22px 2px 12px;color:#d9e6ff;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:900}.board{display:grid;grid-template-columns:repeat(6,minmax(242px,1fr));gap:16px;align-items:start}
+    .col{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:linear-gradient(180deg,rgba(12,20,37,.86),rgba(9,17,31,.98));border:1px solid var(--line);min-height:410px}.col-head{padding:14px 14px 12px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid rgba(124,152,205,.14);background:linear-gradient(180deg,rgba(255,255,255,.03),transparent)}.col-title{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:900}.dot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 18px currentColor}.count{min-width:28px;height:28px;border-radius:999px;padding:0 9px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);color:#dbe7ff;border:1px solid rgba(124,152,205,.16);font-size:12px;font-weight:900}.cards{padding:12px}.empty{padding:12px;border-radius:16px;border:1px dashed rgba(124,152,205,.20);color:#8091af;font-size:13px;background:rgba(255,255,255,.02)}
+    .task{position:relative;overflow:hidden;margin-bottom:12px;border-radius:20px;border:1px solid rgba(124,152,205,.15);background:linear-gradient(180deg,rgba(23,35,62,.95),rgba(16,26,46,.99));padding:14px}.task:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--blue),var(--cyan))}.task-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.task h3{margin:0;font-size:15px;line-height:1.35;font-weight:900;letter-spacing:-.01em;padding-left:4px}.right-badges{display:flex;flex-direction:column;gap:6px;align-items:flex-end}.price,.usd{font-size:11px;font-weight:900;padding:6px 8px;border-radius:10px;white-space:nowrap}.price{color:#d8e8ff;background:rgba(96,165,250,.10);border:1px solid rgba(96,165,250,.14)}.usd{color:#b6f5d7;background:rgba(52,211,153,.10);border:1px solid rgba(52,211,153,.14)}
+    .meta{margin-top:8px;display:grid;gap:5px;color:#9eb0cf;font-size:12px;line-height:1.5;padding-left:4px}.meta strong{color:#dce8ff}.tag-row,.links{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;padding-left:4px}.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;border:1px solid transparent}.tag.high{background:rgba(251,113,133,.12);color:#ffb8c4;border-color:rgba(251,113,133,.18)}.tag.medium{background:rgba(251,191,36,.12);color:#ffdc88;border-color:rgba(251,191,36,.18)}.tag.low{background:rgba(52,211,153,.12);color:#97efc8;border-color:rgba(52,211,153,.18)}.tag.status{background:rgba(96,165,250,.12);color:#c7dcff;border-color:rgba(96,165,250,.18)}.risk-badge{font-size:11px;font-weight:900;text-transform:uppercase;padding:5px 8px;border-radius:999px}.risk-high{color:#ffb8c4;background:rgba(251,113,133,.12)}.risk-medium{color:#ffdc88;background:rgba(251,191,36,.12)}.risk-low{color:#97efc8;background:rgba(52,211,153,.12)}
+    .links a{text-decoration:none;color:#d5e6ff;font-size:12px;font-weight:800;padding:7px 10px;border-radius:10px;background:rgba(96,165,250,.10);border:1px solid rgba(96,165,250,.16)}
+    .progress-wrap{margin-top:12px;padding-left:4px}.progress-head{display:flex;justify-content:space-between;gap:8px;color:#97a8c6;font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}.bar{height:8px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden;border:1px solid rgba(124,152,205,.10)}.bar>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--cyan))}.stage-row{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;padding-left:4px}.stage{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;padding:5px 7px;border-radius:999px;background:rgba(255,255,255,.04);color:#94a4c0;border:1px solid rgba(124,152,205,.12)}.stage.active{color:#dce8ff;background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.18)}.block-title{margin-top:12px;padding-left:4px;color:#8fa3c7;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}ul{margin:8px 0 0;padding-left:22px;color:#d8e1f2}li{margin:5px 0;font-size:13px;line-height:1.52}
+    .footer{margin-top:18px;padding:14px 16px;border-radius:18px;border:1px solid var(--line);background:rgba(10,18,34,.82);color:#8fa1be;font-size:12px;line-height:1.65}.claiming .dot{color:var(--amber);background:var(--amber)}.doing .dot{color:var(--cyan);background:var(--cyan)}.review .dot{color:var(--violet);background:var(--violet)}.payment .dot{color:var(--green);background:var(--green)}.watching .dot{color:var(--blue);background:var(--blue)}.dropped .dot{color:var(--red);background:var(--red)}
+    @media (max-width:1400px){.board{grid-template-columns:repeat(3,minmax(260px,1fr))}.hero-grid{grid-template-columns:1fr}} @media (max-width:860px){.shell{padding:16px 12px 28px}.hero{padding:18px;border-radius:22px}.stats,.triple{grid-template-columns:repeat(2,1fr)}.hero-bottom{grid-template-columns:1fr}.board{grid-template-columns:1fr}.title{font-size:34px}}
   </style>
 </head>
 <body>
@@ -134,205 +47,49 @@
         <div>
           <div class="eyebrow">🐶 旺财 · Bounty War Room</div>
           <h1 class="title">赏金作战看板</h1>
-          <p class="subtitle">聚焦真正能落袋的任务：收益统计、风险分级、进度流转一屏看清。不要假忙，要把 claim、PR、merge、付款串成完整流水线。</p>
+          <p class="subtitle">自动排序、收益折算、风险分级、进度流转。把最该盯、最可能落袋、最值得继续投入的任务自动顶到前面。</p>
           <div class="updated" id="updated">加载中...</div>
           <div class="stats" id="stats"></div>
           <div class="hero-bottom">
-            <div class="mini-panel">
-              <h3>进度流转</h3>
-              <div class="flow" id="flow"></div>
-            </div>
-            <div style="display:grid; gap:12px;">
-              <div class="mini-panel">
-                <h3>收益统计</h3>
-                <div class="earn-grid" id="earnings"></div>
-              </div>
-              <div class="mini-panel">
-                <h3>风险分级</h3>
-                <div class="risk-grid" id="risk"></div>
-              </div>
+            <div class="cardish"><h3 style="margin:0 0 10px;font-size:14px;color:#deebff;">进度流转</h3><div class="flow" id="flow"></div></div>
+            <div class="stack">
+              <div class="mini-panel cardish"><h3>收益统计</h3><div class="triple" id="earnings"></div></div>
+              <div class="mini-panel cardish"><h3>风险分级</h3><div class="triple" id="risk"></div></div>
             </div>
           </div>
         </div>
         <div class="hero-side">
-          <div class="side-card">
-            <h3>当前主战任务</h3>
-            <div class="side-list" id="focus"></div>
-          </div>
-          <div class="side-card">
-            <h3>下一步动作</h3>
-            <div class="side-list" id="actions"></div>
-          </div>
+          <div class="side-card cardish"><h3>当前主战任务</h3><div class="side-list" id="focus"></div></div>
+          <div class="side-card cardish"><h3>下一步动作</h3><div class="side-list" id="actions"></div></div>
         </div>
       </div>
     </section>
-
     <div class="section-title">任务流转</div>
     <section class="board" id="board"></section>
-
-    <div class="footer">当前是公开远程作战看板。已支持自动刷新；后续可以继续升级成 GitHub 实时联动、merge 自动识别、付款记录和真正的收益曲线。</div>
+    <div class="footer">看板现已支持：自动排序、收益 USD 估算、风险分级、阶段流转。收益折算目前对 RTC 使用保守估值，仅用于内部优先级判断，不代表真实成交价格。</div>
   </div>
-
   <script>
-    const columns = {
-      claiming: '正在抢', doing: '正在做', review: '等 Review', payment: '等付款', watching: '候选 / 观察', dropped: '已放弃'
-    };
-    const statMeta = [
-      ['active', 'Active', '当前推进中的主线任务'],
-      ['watching', 'Watching', '候选与观察池'],
-      ['waitingReview', 'Review', '等待维护者动作'],
-      ['waitingPayment', 'Payment', '待收款 / 待确认']
-    ];
-    const stageOrder = ['candidate', 'claiming', 'draftPr', 'review', 'merged', 'paid', 'dropped'];
-    const stageLabel = { candidate:'候选', claiming:'Claim', draftPr:'Draft PR', review:'Review', merged:'Merged', paid:'Paid', dropped:'Dropped', sourcing:'Sourcing' };
-
-    function esc(v='') { return String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
-    function riskClass(level='low') { return level === 'high' ? 'risk-high' : level === 'medium' ? 'risk-medium' : 'risk-low'; }
-    function pillClass(level='low') { return level === 'high' ? 'red' : level === 'medium' ? 'amber' : 'green'; }
-
-    function renderStats(summary) {
-      return statMeta.map(([key,label,hint]) => `
-        <div class="stat-card">
-          <div class="stat-label">${label}</div>
-          <div class="stat-value">${summary[key] ?? 0}</div>
-          <div class="stat-small">${hint}</div>
-        </div>`).join('');
-    }
-
-    function renderFlow(p) {
-      const items = [
-        ['claimed', 'Claimed'], ['draftPr', 'Draft PR'], ['review', 'Review'], ['merged', 'Merged'], ['paid', 'Paid']
-      ];
-      return items.map(([k, label]) => `
-        <div class="flow-step">
-          <div class="k">${label}</div>
-          <div class="n">${p?.[k] ?? 0}</div>
-        </div>`).join('');
-    }
-
-    function renderMiniGrid(obj, labels) {
-      return Object.entries(labels).map(([k,label]) => `
-        <div class="mini">
-          <div class="k">${label}</div>
-          <div class="v">${esc(obj?.[k] ?? 0)}</div>
-        </div>`).join('');
-    }
-
-    function renderFocus(data) {
-      const focus = (data.columns.doing || []).slice(0,2);
-      if (!focus.length) return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有主战任务</div></div><span class="pill blue">idle</span></div>';
-      return focus.map(item => `
-        <div class="side-item">
-          <div>
-            <div class="name">${esc(item.title)}</div>
-            <div class="desc">${esc(item.status || '')} · ${esc(item.payout || '')} · 风险 ${esc(item.riskLevel || 'unknown')}</div>
-          </div>
-          <span class="pill ${pillClass(item.riskLevel)}">${esc(item.riskLevel || 'active')}</span>
-        </div>`).join('');
-    }
-
-    function renderActions(data) {
-      const acts = [];
-      (data.columns.doing || []).forEach(item => (item.nextActions || []).forEach(x => acts.push({text:x, level:item.priority || 'medium'})));
-      (data.columns.review || []).forEach(item => acts.push({text:`盯 ${item.title} 的 review / merge`, level:item.priority || 'medium'}));
-      (data.columns.watching || []).forEach(item => acts.push({text:`评估 ${item.title}`, level:item.priority || 'low'}));
-      const top = acts.slice(0,4);
-      if (!top.length) return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有动作项</div></div><span class="pill blue">idle</span></div>';
-      return top.map(a => `
-        <div class="side-item">
-          <div>
-            <div class="name">${esc(a.text)}</div>
-            <div class="desc">当前优先动作</div>
-          </div>
-          <span class="pill ${pillClass(a.level)}">next</span>
-        </div>`).join('');
-    }
-
-    function renderMeta(item) {
-      const rows = [
-        item.repo && `<div><strong>仓库：</strong>${esc(item.repo)}</div>`,
-        item.type && `<div><strong>类型：</strong>${esc(item.type)}</div>`,
-        item.status && `<div><strong>状态：</strong>${esc(item.status)}</div>`,
-        item.ownerRisk && `<div><strong>风险备注：</strong>${esc(item.ownerRisk)}</div>`
-      ].filter(Boolean);
-      return rows.length ? `<div class="meta">${rows.join('')}</div>` : '';
-    }
-
-    function renderTags(item) {
-      const tags = [];
-      if (item.priority) tags.push(`<span class="tag ${esc(item.priority)}">${esc(item.priority)}</span>`);
-      if (item.status) tags.push(`<span class="tag status">${esc(item.status)}</span>`);
-      if (item.riskLevel) tags.push(`<span class="risk-badge ${riskClass(item.riskLevel)}">risk ${esc(item.riskLevel)}</span>`);
-      return tags.length ? `<div class="tag-row">${tags.join('')}</div>` : '';
-    }
-
-    function renderLinks(item) {
-      if (!item.links) return '';
-      const html = Object.entries(item.links).map(([k,v]) => `<a href="${esc(v)}" target="_blank" rel="noopener noreferrer">${esc(k)}</a>`).join('');
-      return html ? `<div class="links">${html}</div>` : '';
-    }
-
-    function renderProgress(item) {
-      if (typeof item.progress !== 'number') return '';
-      return `
-        <div class="progress-wrap">
-          <div class="progress-head"><span>进度</span><span>${item.progress}%</span></div>
-          <div class="bar"><span style="width:${Math.max(0, Math.min(100, item.progress))}%"></span></div>
-        </div>`;
-    }
-
-    function renderStages(item) {
-      const active = item.stage || '';
-      const shown = ['candidate','claiming','draftPr','review','merged','paid'];
-      return `<div class="stage-row">${shown.map(s => `<span class="stage ${s===active ? 'active' : ''}">${stageLabel[s]}</span>`).join('')}</div>`;
-    }
-
-    function renderBullets(title, items, prefix='') {
-      if (!items?.length) return '';
-      return `<div class="block-title">${title}</div><ul>${items.map(x => `<li>${prefix}${esc(x)}</li>`).join('')}</ul>`;
-    }
-
-    function renderCard(item) {
-      return `
-        <article class="card">
-          <div class="card-top">
-            <h3>${esc(item.title || '')}</h3>
-            ${item.payout ? `<div class="price">${esc(item.payout)}</div>` : ''}
-          </div>
-          ${renderMeta(item)}
-          ${renderTags(item)}
-          ${renderProgress(item)}
-          ${renderStages(item)}
-          ${renderLinks(item)}
-          ${renderBullets('备注', item.notes)}
-          ${renderBullets('下一步', item.nextActions, '➡ ')}
-        </article>`;
-    }
-
-    fetch('./data.json').then(r => r.json()).then(data => {
-      document.getElementById('updated').textContent = `更新时间：${data.updatedAt} · 时区：${data.timezone}`;
-      document.getElementById('stats').innerHTML = renderStats(data.summary || {});
-      document.getElementById('flow').innerHTML = renderFlow(data.summary?.pipeline || {});
-      document.getElementById('earnings').innerHTML = renderMiniGrid(data.summary?.earnings || {}, { locked:'Locked', pending:'Pending', paid:'Paid' });
-      document.getElementById('risk').innerHTML = renderMiniGrid(data.summary?.risk || {}, { high:'High Risk', medium:'Medium Risk', low:'Low Risk' });
-      document.getElementById('focus').innerHTML = renderFocus(data);
-      document.getElementById('actions').innerHTML = renderActions(data);
-      document.getElementById('board').innerHTML = Object.entries(columns).map(([key,title]) => {
-        const items = data.columns?.[key] || [];
-        return `
-          <section class="col ${key}">
-            <div class="col-head">
-              <div class="col-title"><span class="dot"></span>${title}</div>
-              <span class="count">${items.length}</span>
-            </div>
-            <div class="cards">
-              ${items.length ? items.map(renderCard).join('') : '<div class="empty">暂无任务</div>'}
-            </div>
-          </section>`;
-      }).join('');
-    }).catch(err => {
-      document.getElementById('updated').textContent = '加载失败：' + err;
-    });
+    const columns={claiming:'正在抢',doing:'正在做',review:'等 Review',payment:'等付款',watching:'候选 / 观察',dropped:'已放弃'};
+    const statMeta=[['active','Active','当前推进中的主线任务'],['watching','Watching','候选与观察池'],['waitingReview','Review','等待维护者动作'],['waitingPayment','Payment','待收款 / 待确认']];
+    const stageLabel={candidate:'候选',claiming:'Claim',draftPr:'Draft PR',review:'Review',merged:'Merged',paid:'Paid',dropped:'Dropped',sourcing:'Sourcing'};
+    const stageOrder=['candidate','claiming','draftPr','review','merged','paid','dropped'];
+    const riskWeight={high:0,medium:1,low:2}; const priorityWeight={high:0,medium:1,low:2};
+    const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+    const riskClass=l=>l==='high'?'risk-high':l==='medium'?'risk-medium':'risk-low'; const pillClass=l=>l==='high'?'red':l==='medium'?'amber':l==='low'?'green':'blue';
+    function sortItems(items){return [...items].sort((a,b)=>((b.priorityScore||0)-(a.priorityScore||0))||((b.payoutUsdEst||0)-(a.payoutUsdEst||0))||((a.progress||0)-(b.progress||0))||(riskWeight[a.riskLevel]??9)-(riskWeight[b.riskLevel]??9));}
+    function renderStats(summary){return statMeta.map(([k,l,h])=>`<div class="cardish"><div class="stat-label">${l}</div><div class="stat-value">${summary[k]??0}</div><div class="stat-small">${h}</div></div>`).join('')}
+    function renderFlow(p){return [['claimed','Claimed'],['draftPr','Draft PR'],['review','Review'],['merged','Merged'],['paid','Paid']].map(([k,l])=>`<div class="flow-step"><div class="k">${l}</div><div class="n">${p?.[k]??0}</div></div>`).join('')}
+    function renderMini(obj, defs, type){return Object.entries(defs).map(([k,l])=>`<div class="mini"><div class="mini-k">${l}</div><div class="mini-v">${esc(obj?.[k]??0)}</div><div class="mini-sub">${type==='earn'&&k.endsWith('UsdEst')?'USD estimate':''}</div></div>`).join('')}
+    function renderFocus(data){const focus=sortItems(data.columns.doing||[]).slice(0,2); if(!focus.length)return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有主战任务</div></div><span class="pill blue">idle</span></div>'; return focus.map(item=>`<div class="side-item"><div><div class="name">${esc(item.title)}</div><div class="desc">${esc(item.status)} · ${esc(item.payout||'')} · 估值 $${esc(item.payoutUsdEst||0)} · 风险 ${esc(item.riskLevel||'')}</div></div><span class="pill ${pillClass(item.riskLevel)}">${esc(item.priority||'active')}</span></div>`).join('')}
+    function renderActions(data){const acts=[];(data.columns.doing||[]).forEach(i=>(i.nextActions||[]).forEach(x=>acts.push({text:x,level:i.priority||'medium',score:i.priorityScore||0})));(data.columns.review||[]).forEach(i=>acts.push({text:`盯 ${i.title} 的 review / merge`,level:i.priority||'medium',score:i.priorityScore||0}));(data.columns.watching||[]).forEach(i=>acts.push({text:`评估 ${i.title}`,level:i.priority||'low',score:i.priorityScore||0})); const top=acts.sort((a,b)=>b.score-a.score).slice(0,4); if(!top.length)return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有动作项</div></div><span class="pill blue">idle</span></div>'; return top.map(a=>`<div class="side-item"><div><div class="name">${esc(a.text)}</div><div class="desc">当前优先动作</div></div><span class="pill ${pillClass(a.level)}">next</span></div>`).join('')}
+    function renderMeta(item){const rows=[item.repo&&`<div><strong>仓库：</strong>${esc(item.repo)}</div>`,item.type&&`<div><strong>类型：</strong>${esc(item.type)}</div>`,item.status&&`<div><strong>状态：</strong>${esc(item.status)}</div>`,item.ownerRisk&&`<div><strong>风险备注：</strong>${esc(item.ownerRisk)}</div>`,typeof item.priorityScore==='number'&&`<div><strong>优先级分：</strong>${esc(item.priorityScore)}</div>`].filter(Boolean); return rows.length?`<div class="meta">${rows.join('')}</div>`:''}
+    function renderTags(item){const tags=[]; if(item.priority)tags.push(`<span class="tag ${esc(item.priority)}">${esc(item.priority)}</span>`); if(item.status)tags.push(`<span class="tag status">${esc(item.status)}</span>`); if(item.riskLevel)tags.push(`<span class="risk-badge ${riskClass(item.riskLevel)}">risk ${esc(item.riskLevel)}</span>`); return tags.length?`<div class="tag-row">${tags.join('')}</div>`:''}
+    function renderLinks(item){if(!item.links)return''; const html=Object.entries(item.links).map(([k,v])=>`<a href="${esc(v)}" target="_blank" rel="noopener noreferrer">${esc(k)}</a>`).join(''); return html?`<div class="links">${html}</div>`:''}
+    function renderProgress(item){if(typeof item.progress!=='number')return''; return `<div class="progress-wrap"><div class="progress-head"><span>进度</span><span>${item.progress}%</span></div><div class="bar"><span style="width:${Math.max(0,Math.min(100,item.progress))}%"></span></div></div>`}
+    function renderStages(item){const active=item.stage||''; const shown=['candidate','claiming','draftPr','review','merged','paid']; return `<div class="stage-row">${shown.map(s=>`<span class="stage ${s===active?'active':''}">${stageLabel[s]}</span>`).join('')}</div>`}
+    function renderBullets(title,items,prefix=''){if(!items?.length)return''; return `<div class="block-title">${title}</div><ul>${items.map(x=>`<li>${prefix}${esc(x)}</li>`).join('')}</ul>`}
+    function renderTask(item){return `<article class="task"><div class="task-top"><h3>${esc(item.title||'')}</h3><div class="right-badges">${item.payout?`<div class="price">${esc(item.payout)}</div>`:''}${typeof item.payoutUsdEst==='number'&&item.payoutUsdEst>0?`<div class="usd">≈ $${item.payoutUsdEst.toFixed(2)}</div>`:''}</div></div>${renderMeta(item)}${renderTags(item)}${renderProgress(item)}${renderStages(item)}${renderLinks(item)}${renderBullets('备注',item.notes)}${renderBullets('下一步',item.nextActions,'➡ ')}</article>`}
+    fetch('./data.json').then(r=>r.json()).then(data=>{document.getElementById('updated').textContent=`更新时间：${data.updatedAt} · 时区：${data.timezone} · 收益折算说明：RTC 采用保守估值 $${data.fx?.RTC_USD_EST ?? '?'} / RTC`;document.getElementById('stats').innerHTML=renderStats(data.summary||{});document.getElementById('flow').innerHTML=renderFlow(data.summary?.pipeline||{});document.getElementById('earnings').innerHTML=renderMini({locked:data.summary?.earnings?.locked,pending:data.summary?.earnings?.pending,paid:data.summary?.earnings?.paid,lockedUsdEst:`≈ $${(data.summary?.earnings?.lockedUsdEst??0).toFixed(2)}`,pendingUsdEst:`≈ $${(data.summary?.earnings?.pendingUsdEst??0).toFixed(2)}`,paidUsdEst:`≈ $${(data.summary?.earnings?.paidUsdEst??0).toFixed(2)}`},{locked:'Locked',pending:'Pending',paid:'Paid'},'earn');document.getElementById('risk').innerHTML=renderMini(data.summary?.risk||{},{high:'High Risk',medium:'Medium Risk',low:'Low Risk'},'risk');document.getElementById('focus').innerHTML=renderFocus(data);document.getElementById('actions').innerHTML=renderActions(data);document.getElementById('board').innerHTML=Object.entries(columns).map(([key,title])=>{const items=sortItems(data.columns?.[key]||[]);return `<section class="col ${key}"><div class="col-head"><div class="col-title"><span class="dot"></span>${title}</div><span class="count">${items.length}</span></div><div class="cards">${items.length?items.map(renderTask).join(''):'<div class="empty">暂无任务</div>'}</div></section>`}).join('')}).catch(err=>{document.getElementById('updated').textContent='加载失败：'+err})
   </script>
 </body>
 </html>
