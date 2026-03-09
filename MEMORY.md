@@ -17,3 +17,4 @@
 - USD/RMB payout method should be selected later based on the payer/platform and withdrawal context.
 - User always uses Beijing time.
 - User wants a daily summary of bounty-task progress at 22:00 Beijing time.
+- When the user sends a CA address, default behavior is to query it directly without asking for confirmation.
