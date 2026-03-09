@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-09 23:47 GMT+8",
+  "updatedAt": "2026-03-10 00:47 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -44,7 +44,7 @@
         "priorityScore": 78,
         "riskLevel": "medium",
         "stage": "claiming",
-        "progress": 15,
+        "progress": 12,
         "notes": [
           "已公开认领",
           "偏规格/追踪型任务，难度中高",
@@ -54,11 +54,11 @@
           "观察评论反馈",
           "如维护者确认，补更具体实现路径"
         ],
-        "issueState": "OPEN",
+        "issueState": "CLOSED",
         "links": {
           "issue": "https://github.com/Scottcjn/rustchain-bounties/issues/1511"
         },
-        "status": "Open",
+        "status": "Closed",
         "comments": [
           {
             "id": "IC_kwDORGgqa87vqJbB",
@@ -119,6 +119,21 @@
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1511#issuecomment-4024468127",
             "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87v6tDZ",
+            "author": {
+              "login": "Scottcjn"
+            },
+            "authorAssociation": "OWNER",
+            "body": "This bounty has been completed by createkr (PRs Scottcjn/Rustchain#732-735, merged March 9). Closing as fulfilled. Thanks for the interest — check the [bounty board](https://github.com/Scottcjn/rustchain-bounties/issues) for other open tasks\\!",
+            "createdAt": "2026-03-09T16:43:38Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1511#issuecomment-4025143513",
+            "viewerDidAuthor": false
           }
         ]
       },
@@ -133,7 +148,7 @@
         "priorityScore": 76,
         "riskLevel": "medium",
         "stage": "claiming",
-        "progress": 15,
+        "progress": 12,
         "notes": [
           "已公开认领",
           "偏部署/规格任务",
@@ -143,11 +158,11 @@
           "等待反馈",
           "如确认可做，再细化计划"
         ],
-        "issueState": "OPEN",
+        "issueState": "CLOSED",
         "links": {
           "issue": "https://github.com/Scottcjn/rustchain-bounties/issues/1509"
         },
-        "status": "Open",
+        "status": "Closed",
         "comments": [
           {
             "id": "IC_kwDORGgqa87vqJMV",
@@ -208,6 +223,21 @@
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1509#issuecomment-4024469123",
             "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87v6syP",
+            "author": {
+              "login": "Scottcjn"
+            },
+            "authorAssociation": "OWNER",
+            "body": "This bounty has been completed by createkr (PRs Scottcjn/Rustchain#732-735, merged March 9). Closing as fulfilled. Thanks for the interest — check the [bounty board](https://github.com/Scottcjn/rustchain-bounties/issues) for other open tasks\\!",
+            "createdAt": "2026-03-09T16:43:30Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1509#issuecomment-4025142415",
+            "viewerDidAuthor": false
           }
         ]
       },
@@ -222,7 +252,7 @@
         "priorityScore": 76,
         "riskLevel": "medium",
         "stage": "claiming",
-        "progress": 15,
+        "progress": 12,
         "notes": [
           "已公开认领",
           "偏部署/规格任务",
@@ -232,11 +262,11 @@
           "观察反馈",
           "确认后再推进"
         ],
-        "issueState": "OPEN",
+        "issueState": "CLOSED",
         "links": {
           "issue": "https://github.com/Scottcjn/rustchain-bounties/issues/1510"
         },
-        "status": "Open",
+        "status": "Closed",
         "comments": [
           {
             "id": "IC_kwDORGgqa87vqJSY",
@@ -297,6 +327,21 @@
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1510#issuecomment-4024468510",
             "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87v6s7_",
+            "author": {
+              "login": "Scottcjn"
+            },
+            "authorAssociation": "OWNER",
+            "body": "This bounty has been completed by createkr (PRs Scottcjn/Rustchain#732-735, merged March 9). Closing as fulfilled. Thanks for the interest — check the [bounty board](https://github.com/Scottcjn/rustchain-bounties/issues) for other open tasks\\!",
+            "createdAt": "2026-03-09T16:43:35Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1510#issuecomment-4025143039",
+            "viewerDidAuthor": false
           }
         ]
       },
@@ -311,7 +356,7 @@
         "priorityScore": 77,
         "riskLevel": "medium",
         "stage": "claiming",
-        "progress": 15,
+        "progress": 12,
         "notes": [
           "已公开认领",
           "范围中高",
@@ -321,11 +366,11 @@
           "观察反馈",
           "维护者回应后细化方案"
         ],
-        "issueState": "OPEN",
+        "issueState": "CLOSED",
         "links": {
           "issue": "https://github.com/Scottcjn/rustchain-bounties/issues/1512"
         },
-        "status": "Open",
+        "status": "Closed",
         "comments": [
           {
             "id": "IC_kwDORGgqa87vqJgv",
@@ -415,6 +460,21 @@
             "minimizedReason": "",
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1512#issuecomment-4024467749",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87v6tLL",
+            "author": {
+              "login": "Scottcjn"
+            },
+            "authorAssociation": "OWNER",
+            "body": "This bounty has been completed by createkr (PRs Scottcjn/Rustchain#732-735, merged March 9). Closing as fulfilled. Thanks for the interest — check the [bounty board](https://github.com/Scottcjn/rustchain-bounties/issues) for other open tasks\\!",
+            "createdAt": "2026-03-09T16:43:42Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1512#issuecomment-4025144011",
             "viewerDidAuthor": false
           }
         ]
