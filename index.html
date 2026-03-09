@@ -3,25 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>旺财 · 赏金任务看板</title>
+  <title>旺财 · 赏金作战看板</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #07111f;
-      --bg2: #0c1729;
-      --panel: rgba(16, 25, 49, 0.78);
-      --panel-2: rgba(21, 31, 57, 0.92);
-      --line: rgba(104, 130, 184, 0.22);
-      --text: #edf2ff;
-      --muted: #94a3b8;
+      --bg: #060c18;
+      --bg2: #0b1324;
+      --panel: rgba(13, 21, 39, 0.82);
+      --panel-2: rgba(18, 28, 50, 0.92);
+      --line: rgba(125, 152, 203, 0.18);
+      --line-strong: rgba(125, 152, 203, 0.28);
+      --text: #edf3ff;
+      --muted: #90a0be;
       --blue: #60a5fa;
       --cyan: #22d3ee;
       --green: #34d399;
       --amber: #fbbf24;
       --red: #fb7185;
       --violet: #a78bfa;
-      --shadow: 0 10px 30px rgba(0,0,0,.28);
-      --radius: 22px;
+      --shadow: 0 16px 42px rgba(0,0,0,.32);
+      --radius: 24px;
     }
     * { box-sizing: border-box; }
     body {
@@ -29,265 +30,109 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(34,211,238,.12), transparent 28%),
-        radial-gradient(circle at top right, rgba(96,165,250,.16), transparent 32%),
-        linear-gradient(180deg, #08101d 0%, #0a1322 45%, #08101b 100%);
+        radial-gradient(circle at 0% 0%, rgba(34,211,238,.10), transparent 25%),
+        radial-gradient(circle at 100% 0%, rgba(96,165,250,.12), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(167,139,250,.10), transparent 24%),
+        linear-gradient(180deg, #050b16 0%, #08101d 55%, #050b14 100%);
       min-height: 100vh;
     }
-    .shell {
-      max-width: 1480px;
-      margin: 0 auto;
-      padding: 28px 20px 40px;
-    }
+    .shell { max-width: 1540px; margin: 0 auto; padding: 24px 18px 38px; }
     .hero {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(17,24,39,.88), rgba(14,25,47,.92));
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
+      position: relative; overflow: hidden; border-radius: 30px; box-shadow: var(--shadow);
+      border: 1px solid var(--line); background: linear-gradient(135deg, rgba(12,18,33,.94), rgba(14,25,46,.96));
       padding: 24px;
     }
+    .hero::before {
+      content:""; position:absolute; inset:-30% auto auto -10%; width:380px; height:380px;
+      background: radial-gradient(circle, rgba(34,211,238,.10), transparent 60%); pointer-events:none;
+    }
     .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto -80px -100px auto;
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle, rgba(96,165,250,.18), transparent 60%);
-      pointer-events: none;
+      content:""; position:absolute; inset:auto -6% -35% auto; width:380px; height:380px;
+      background: radial-gradient(circle, rgba(96,165,250,.14), transparent 60%); pointer-events:none;
     }
-    .hero-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: flex-start;
-      flex-wrap: wrap;
-    }
+    .hero-grid { display:grid; grid-template-columns: 1.35fr .85fr; gap:18px; position:relative; z-index:1; }
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(96,165,250,.24);
-      background: rgba(96,165,250,.08);
-      color: #cfe0ff;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(96,165,250,.2); background:rgba(96,165,250,.08);
+      color:#d6e5ff; font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase;
     }
-    .title {
-      margin: 14px 0 8px;
-      font-size: clamp(30px, 4vw, 48px);
-      line-height: 1.02;
-      font-weight: 900;
-      letter-spacing: -.03em;
+    .title { margin:14px 0 8px; font-size:clamp(34px,4vw,54px); line-height:1; letter-spacing:-.04em; font-weight:950; }
+    .subtitle { margin:0; max-width:780px; color:#a5b3cc; font-size:15px; line-height:1.7; }
+    .updated { margin-top:14px; color:var(--muted); font-size:13px; }
+    .quick {
+      margin-top:18px; display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:12px;
     }
-    .subtitle {
-      margin: 0;
-      color: #a5b4cf;
-      max-width: 760px;
-      line-height: 1.65;
-      font-size: 15px;
+    .quick-card {
+      border-radius:18px; padding:14px; border:1px solid var(--line); background:rgba(255,255,255,.03);
     }
-    .updated {
-      margin-top: 14px;
-      font-size: 13px;
-      color: var(--muted);
+    .quick-card .label { color:#9aabc8; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+    .quick-card .value { margin-top:8px; font-size:26px; font-weight:900; letter-spacing:-.03em; }
+    .quick-card .small { margin-top:8px; color:#8092b0; font-size:12px; line-height:1.5; }
+    .hero-side { display:grid; gap:12px; }
+    .side-card {
+      border-radius:22px; padding:16px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
     }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(130px, 1fr));
-      gap: 12px;
-      width: min(100%, 620px);
+    .side-card h3 { margin:0 0 10px; font-size:14px; color:#dce8ff; }
+    .side-list { display:grid; gap:10px; }
+    .side-item {
+      display:flex; justify-content:space-between; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:14px; background:rgba(255,255,255,.03); border:1px solid rgba(125,152,203,.12);
     }
-    .stat {
-      background: linear-gradient(180deg, rgba(19,29,55,.82), rgba(14,23,43,.95));
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 16px;
-      min-height: 102px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .side-item .name { font-size:13px; font-weight:700; }
+    .side-item .desc { margin-top:4px; color:#8fa1be; font-size:12px; }
+    .pill {
+      display:inline-flex; align-items:center; justify-content:center; min-width:60px; padding:6px 8px; border-radius:999px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.04em;
+      border:1px solid transparent;
     }
-    .stat .k {
-      font-size: 12px;
-      color: #91a2c3;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      font-weight: 700;
-    }
-    .stat .n {
-      font-size: 34px;
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: -.03em;
-    }
-    .stat .hint {
-      color: #7f90ae;
-      font-size: 12px;
-    }
-    .board {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: repeat(6, minmax(240px, 1fr));
-      gap: 16px;
-      align-items: start;
-    }
+    .pill.green { background:rgba(52,211,153,.12); color:#9cf0cb; border-color:rgba(52,211,153,.18); }
+    .pill.blue { background:rgba(96,165,250,.12); color:#d3e6ff; border-color:rgba(96,165,250,.18); }
+    .pill.amber { background:rgba(251,191,36,.12); color:#ffdc88; border-color:rgba(251,191,36,.18); }
+    .pill.red { background:rgba(251,113,133,.12); color:#ffbac6; border-color:rgba(251,113,133,.18); }
+    .section-title { margin:22px 2px 12px; color:#d9e6ff; font-size:13px; letter-spacing:.08em; text-transform:uppercase; font-weight:800; }
+    .board { display:grid; grid-template-columns: repeat(6, minmax(240px, 1fr)); gap:16px; align-items:start; }
     .col {
-      background: linear-gradient(180deg, rgba(14,24,45,.8), rgba(10,18,34,.96));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      min-height: 360px;
-      overflow: hidden;
+      border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow); backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(12,20,37,.84), rgba(9,17,31,.98)); border:1px solid var(--line);
+      min-height: 390px;
     }
     .col-head {
-      padding: 14px 14px 12px;
-      border-bottom: 1px solid rgba(104,130,184,.16);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+      padding: 14px 14px 12px; display:flex; justify-content:space-between; align-items:center; gap:12px;
+      border-bottom:1px solid rgba(125,152,203,.14); background:linear-gradient(180deg, rgba(255,255,255,.03), transparent);
     }
-    .col-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: -.01em;
-    }
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      box-shadow: 0 0 18px currentColor;
-    }
-    .count {
-      min-width: 26px;
-      height: 26px;
-      padding: 0 8px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 800;
-      color: #dbe7ff;
-      background: rgba(96,165,250,.12);
-      border: 1px solid rgba(96,165,250,.18);
-    }
-    .cards {
-      padding: 12px;
-    }
-    .empty {
-      color: #7f8da8;
-      font-size: 13px;
-      padding: 12px;
-      border: 1px dashed rgba(104,130,184,.22);
-      border-radius: 16px;
-      background: rgba(255,255,255,.02);
-    }
+    .col-title { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:850; }
+    .dot { width:10px; height:10px; border-radius:50%; box-shadow:0 0 18px currentColor; }
+    .count { min-width:28px; height:28px; border-radius:999px; padding:0 9px; display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,.04); color:#dbe7ff; border:1px solid rgba(125,152,203,.16); font-size:12px; font-weight:900; }
+    .cards { padding:12px; }
+    .empty { padding:12px; border-radius:16px; border:1px dashed rgba(125,152,203,.20); color:#8091af; font-size:13px; background:rgba(255,255,255,.02); }
     .card {
-      background: linear-gradient(180deg, rgba(24,35,64,.92), rgba(18,28,50,.98));
-      border: 1px solid rgba(123,154,216,.16);
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 12px;
-      position: relative;
-      overflow: hidden;
+      position:relative; overflow:hidden; margin-bottom:12px; border-radius:18px; border:1px solid rgba(125,152,203,.15);
+      background: linear-gradient(180deg, rgba(22,34,61,.94), rgba(16,26,46,.98)); padding:14px;
     }
     .card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 3px;
-      background: linear-gradient(180deg, var(--blue), var(--cyan));
-      opacity: .85;
+      content:""; position:absolute; inset:0 auto 0 0; width:3px; background:linear-gradient(180deg, var(--blue), var(--cyan)); opacity:.9;
     }
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 15px;
-      line-height: 1.35;
-      font-weight: 800;
-      letter-spacing: -.01em;
-      padding-left: 4px;
-    }
-    .meta {
-      display: grid;
-      gap: 5px;
-      color: #9eb0cf;
-      font-size: 12px;
-      line-height: 1.5;
-      padding-left: 4px;
-    }
-    .meta strong { color: #dce7ff; font-weight: 700; }
-    .tag-row {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-left: 4px;
-    }
+    .card-top { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+    .card h3 { margin:0; font-size:15px; line-height:1.35; font-weight:850; letter-spacing:-.01em; padding-left:4px; }
+    .price { font-size:12px; font-weight:900; color:#d8e8ff; padding:6px 8px; border-radius:10px; background:rgba(96,165,250,.10); border:1px solid rgba(96,165,250,.14); white-space:nowrap; }
+    .meta { margin-top:8px; display:grid; gap:5px; color:#9eb0cf; font-size:12px; line-height:1.5; padding-left:4px; }
+    .meta strong { color:#dce8ff; }
+    .tag-row, .links { margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; padding-left:4px; }
     .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .03em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
+      display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; font-size:11px; font-weight:850; text-transform:uppercase; letter-spacing:.04em; border:1px solid transparent;
     }
-    .tag.high { background: rgba(251,113,133,.12); color: #ffb8c4; border-color: rgba(251,113,133,.18); }
-    .tag.medium { background: rgba(251,191,36,.12); color: #ffd976; border-color: rgba(251,191,36,.18); }
-    .tag.low { background: rgba(52,211,153,.12); color: #95f0c7; border-color: rgba(52,211,153,.18); }
-    .tag.status { background: rgba(96,165,250,.12); color: #c7dcff; border-color: rgba(96,165,250,.18); }
-    .links {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-left: 4px;
-    }
+    .tag.high { background:rgba(251,113,133,.12); color:#ffb8c4; border-color:rgba(251,113,133,.18); }
+    .tag.medium { background:rgba(251,191,36,.12); color:#ffdc88; border-color:rgba(251,191,36,.18); }
+    .tag.low { background:rgba(52,211,153,.12); color:#97efc8; border-color:rgba(52,211,153,.18); }
+    .tag.status { background:rgba(96,165,250,.12); color:#c7dcff; border-color:rgba(96,165,250,.18); }
     .links a {
-      text-decoration: none;
-      color: #cfe2ff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 7px 10px;
-      border-radius: 10px;
-      background: rgba(96,165,250,.1);
-      border: 1px solid rgba(96,165,250,.16);
+      text-decoration:none; color:#d5e6ff; font-size:12px; font-weight:800; padding:7px 10px; border-radius:10px;
+      background:rgba(96,165,250,.10); border:1px solid rgba(96,165,250,.16);
     }
-    .links a:hover { background: rgba(96,165,250,.16); }
-    ul {
-      margin: 12px 0 0;
-      padding-left: 20px;
-      color: #d8e1f1;
-    }
-    li {
-      margin: 5px 0;
-      font-size: 13px;
-      line-height: 1.5;
-    }
+    .links a:hover { background:rgba(96,165,250,.16); }
+    .block-title { margin-top:12px; padding-left:4px; color:#8fa3c7; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+    ul { margin:8px 0 0; padding-left:22px; color:#d8e1f2; }
+    li { margin:5px 0; font-size:13px; line-height:1.52; }
     .footer {
-      margin-top: 18px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(12,21,38,.78);
-      border: 1px solid var(--line);
-      color: #8ea0bf;
-      font-size: 12px;
-      line-height: 1.6;
+      margin-top:18px; padding:14px 16px; border-radius:18px; border:1px solid var(--line); background:rgba(10,18,34,.82); color:#8fa1be; font-size:12px; line-height:1.65;
     }
     .claiming .dot { color: var(--amber); background: var(--amber); }
     .doing .dot { color: var(--cyan); background: var(--cyan); }
@@ -295,35 +140,45 @@
     .payment .dot { color: var(--green); background: var(--green); }
     .watching .dot { color: var(--blue); background: var(--blue); }
     .dropped .dot { color: var(--red); background: var(--red); }
-    @media (max-width: 1380px) { .board { grid-template-columns: repeat(3, minmax(260px, 1fr)); } }
+    @media (max-width: 1400px) { .board { grid-template-columns: repeat(3, minmax(260px,1fr)); } .hero-grid { grid-template-columns: 1fr; } }
     @media (max-width: 860px) {
-      .shell { padding: 16px 14px 30px; }
+      .shell { padding: 16px 12px 28px; }
       .hero { padding: 18px; border-radius: 22px; }
-      .stats { grid-template-columns: repeat(2, minmax(120px,1fr)); width:100%; }
+      .quick { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, minmax(110px,1fr)); }
       .board { grid-template-columns: 1fr; }
-      .title { font-size: 32px; }
+      .title { font-size: 34px; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
     <section class="hero">
-      <div class="hero-top">
+      <div class="hero-grid">
         <div>
-          <div class="eyebrow">🐶 旺财作战系统</div>
-          <h1 class="title">赏金任务看板</h1>
-          <p class="subtitle">给主人盯 GitHub bounty、认领、PR、Review、付款进度。目标不是显得忙，是把钱真正落袋。</p>
+          <div class="eyebrow">🐶 旺财 · Bounty War Room</div>
+          <h1 class="title">真正专业的赏金作战看板</h1>
+          <p class="subtitle">不只是列任务，而是把抢单、交付、Review、付款、候选目标和风险一起放到一个面板里。目标明确：少空转，快落袋。</p>
           <div class="updated" id="updated">加载中...</div>
+          <div class="quick" id="stats"></div>
         </div>
-        <div class="stats" id="stats"></div>
+        <div class="hero-side">
+          <div class="side-card">
+            <h3>当前主战任务</h3>
+            <div class="side-list" id="focus"></div>
+          </div>
+          <div class="side-card">
+            <h3>下一步动作</h3>
+            <div class="side-list" id="actions"></div>
+          </div>
+        </div>
       </div>
     </section>
 
+    <div class="section-title">任务流转</div>
     <section class="board" id="board"></section>
 
-    <div class="footer">
-      当前为公开远程看板。展示的是主人这边的赏金任务状态、候选目标和推进节奏。后面还能继续加：GitHub 实时联动、Review 计数、付款记录、日报同步更新。
-    </div>
+    <div class="footer">公开远程看板：适合随时查看整体战况。当前已支持定时自动刷新；后续还能继续接 GitHub 实时联动、付款记录、日报同步和风险趋势图。</div>
   </div>
 
   <script>
@@ -337,19 +192,33 @@
     };
 
     const statMeta = [
-      ['active', 'Active', '当前推进中'],
-      ['watching', 'Watching', '观察和备选'],
+      ['active', 'Active', '当前推进中的主线任务'],
+      ['watching', 'Watching', '候选与观察池'],
       ['waitingReview', 'Review', '等待维护者动作'],
-      ['waitingPayment', 'Payment', '等收款']
+      ['waitingPayment', 'Payment', '待收款 / 待确认']
     ];
 
     function esc(v='') {
-      return String(v)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
+      return String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+    }
+
+    function renderStats(summary) {
+      return statMeta.map(([key,label,hint]) => `
+        <div class="quick-card">
+          <div class="label">${label}</div>
+          <div class="value">${summary[key] ?? 0}</div>
+          <div class="small">${hint}</div>
+        </div>`).join('');
+    }
+
+    function renderMeta(item) {
+      const rows = [
+        item.repo && `<div><strong>仓库：</strong>${esc(item.repo)}</div>`,
+        item.type && `<div><strong>类型：</strong>${esc(item.type)}</div>`,
+        item.status && `<div><strong>状态：</strong>${esc(item.status)}</div>`,
+        item.ownerRisk && `<div><strong>风险：</strong>${esc(item.ownerRisk)}</div>`
+      ].filter(Boolean);
+      return rows.length ? `<div class="meta">${rows.join('')}</div>` : '';
     }
 
     function renderTags(item) {
@@ -359,67 +228,83 @@
       return tags.length ? `<div class="tag-row">${tags.join('')}</div>` : '';
     }
 
-    function renderMeta(item) {
-      const rows = [
-        item.repo && `<div><strong>仓库：</strong>${esc(item.repo)}</div>`,
-        item.type && `<div><strong>类型：</strong>${esc(item.type)}</div>`,
-        item.payout && `<div><strong>赏金：</strong>${esc(item.payout)}</div>`,
-        item.ownerRisk && `<div><strong>风险：</strong>${esc(item.ownerRisk)}</div>`
-      ].filter(Boolean);
-      return rows.length ? `<div class="meta">${rows.join('')}</div>` : '';
-    }
-
     function renderLinks(item) {
       if (!item.links) return '';
       const html = Object.entries(item.links).map(([k,v]) => `<a href="${esc(v)}" target="_blank" rel="noopener noreferrer">${esc(k)}</a>`).join('');
       return html ? `<div class="links">${html}</div>` : '';
     }
 
-    function renderList(items, prefix='') {
-      return items?.length ? `<ul>${items.map(x => `<li>${prefix}${esc(x)}</li>`).join('')}</ul>` : '';
+    function renderBullets(title, items, prefix='') {
+      if (!items?.length) return '';
+      return `<div class="block-title">${title}</div><ul>${items.map(x => `<li>${prefix}${esc(x)}</li>`).join('')}</ul>`;
     }
 
     function renderCard(item) {
       return `
         <article class="card">
-          <h3>${esc(item.title || '')}</h3>
+          <div class="card-top">
+            <h3>${esc(item.title || '')}</h3>
+            ${item.payout ? `<div class="price">${esc(item.payout)}</div>` : ''}
+          </div>
           ${renderMeta(item)}
           ${renderTags(item)}
           ${renderLinks(item)}
-          ${renderList(item.notes)}
-          ${renderList(item.nextActions, '➡ ')}
+          ${renderBullets('备注', item.notes)}
+          ${renderBullets('下一步', item.nextActions, '➡ ')}
         </article>`;
     }
 
-    fetch('./data.json')
-      .then(r => r.json())
-      .then(data => {
-        document.getElementById('updated').textContent = `更新时间：${data.updatedAt} · 时区：${data.timezone}`;
+    function renderFocus(data) {
+      const focus = (data.columns.doing || []).slice(0,2);
+      if (!focus.length) return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有主战任务</div></div><span class="pill blue">idle</span></div>';
+      return focus.map(item => `
+        <div class="side-item">
+          <div>
+            <div class="name">${esc(item.title)}</div>
+            <div class="desc">${esc(item.status || '')} · ${esc(item.payout || '')}</div>
+          </div>
+          <span class="pill ${item.priority === 'high' ? 'red' : item.priority === 'medium' ? 'amber' : 'blue'}">${esc(item.priority || 'active')}</span>
+        </div>`).join('');
+    }
 
-        document.getElementById('stats').innerHTML = statMeta.map(([key,label,hint]) => `
-          <div class="stat">
-            <div class="k">${label}</div>
-            <div class="n">${data.summary[key] ?? 0}</div>
-            <div class="hint">${hint}</div>
-          </div>`).join('');
+    function renderActions(data) {
+      const acts = [];
+      (data.columns.doing || []).forEach(item => (item.nextActions || []).forEach(x => acts.push({text:x, state:'amber'})));
+      (data.columns.review || []).forEach(item => acts.push({text:`盯 ${item.title} 的 review / merge`, state:'violet'}));
+      (data.columns.watching || []).forEach(item => acts.push({text:`评估 ${item.title}`, state:'blue'}));
+      const top = acts.slice(0,4);
+      if (!top.length) return '<div class="side-item"><div><div class="name">暂无</div><div class="desc">当前没有动作项</div></div><span class="pill blue">idle</span></div>';
+      return top.map(a => `
+        <div class="side-item">
+          <div>
+            <div class="name">${esc(a.text)}</div>
+            <div class="desc">当前优先动作</div>
+          </div>
+          <span class="pill ${a.state === 'amber' ? 'amber' : a.state === 'violet' ? 'blue' : 'green'}">next</span>
+        </div>`).join('');
+    }
 
-        document.getElementById('board').innerHTML = Object.entries(columns).map(([key, title]) => {
-          const items = data.columns?.[key] || [];
-          return `
-            <section class="col ${key}">
-              <div class="col-head">
-                <div class="col-title"><span class="dot"></span>${title}</div>
-                <span class="count">${items.length}</span>
-              </div>
-              <div class="cards">
-                ${items.length ? items.map(renderCard).join('') : '<div class="empty">暂无任务</div>'}
-              </div>
-            </section>`;
-        }).join('');
-      })
-      .catch(err => {
-        document.getElementById('updated').textContent = '加载失败：' + err;
-      });
+    fetch('./data.json').then(r => r.json()).then(data => {
+      document.getElementById('updated').textContent = `更新时间：${data.updatedAt} · 时区：${data.timezone}`;
+      document.getElementById('stats').innerHTML = renderStats(data.summary || {});
+      document.getElementById('focus').innerHTML = renderFocus(data);
+      document.getElementById('actions').innerHTML = renderActions(data);
+      document.getElementById('board').innerHTML = Object.entries(columns).map(([key,title]) => {
+        const items = data.columns?.[key] || [];
+        return `
+          <section class="col ${key}">
+            <div class="col-head">
+              <div class="col-title"><span class="dot"></span>${title}</div>
+              <span class="count">${items.length}</span>
+            </div>
+            <div class="cards">
+              ${items.length ? items.map(renderCard).join('') : '<div class="empty">暂无任务</div>'}
+            </div>
+          </section>`;
+      }).join('');
+    }).catch(err => {
+      document.getElementById('updated').textContent = '加载失败：' + err;
+    });
   </script>
 </body>
 </html>
