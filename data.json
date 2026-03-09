@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-09 13:20 GMT+8",
+  "updatedAt": "2026-03-09 13:53 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -373,6 +373,36 @@
             "minimizedReason": "",
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4020840042",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87vr2uY",
+            "author": {
+              "login": "noxxxxybot-sketch"
+            },
+            "authorAssociation": "NONE",
+            "body": "## Bounty Claim — Start Here Quickstart\n\n**Submitted PR:** https://github.com/Scottcjn/Rustchain/pull/740\n\n### What Was Done\n\nCreated `START_HERE.md` with three complete onboarding paths:\n\n1. **💳 Wallet/User** — create wallet via clawrtc or API, check balance, receive RTC. Explicit callout that RTC wallet addresses are NOT ETH/SOL addresses.\n\n2. **⛏️ Miner** — install clawrtc, start mining, check status, antiquity multiplier table (1x modern → 3x PowerPC)\n\n3. **🛠️ Developer** — clone repo, explore API endpoints with working curl commands, find bounties, claim process\n\nAll commands tested against live node `https://50.28.86.131`. Self-signed cert caveat noted throughout.\n\n**PR:** https://github.com/Scottcjn/Rustchain/pull/740 (references Scottcjn/Rustchain#700)\n\n**RustChain wallet:** noxventures_rtc\n\nClaiming 25 RTC.",
+            "createdAt": "2026-03-09T05:26:02Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4021250968",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87vr4oP",
+            "author": {
+              "login": "loverun321"
+            },
+            "authorAssociation": "NONE",
+            "body": "I would like to work on this. I'll create the Start Here quickstart covering wallet, miner, and developer paths with tested commands.",
+            "createdAt": "2026-03-09T05:28:52Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1493#issuecomment-4021258767",
             "viewerDidAuthor": false
           }
         ]
