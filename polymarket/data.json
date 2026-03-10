@@ -1,157 +1,48 @@
 {
-  "updatedAt": "2026-03-10 10:34 GMT+8",
-  "phase": "第三轮：加市场过滤的低价票策略",
+  "updatedAt": "2026-03-10 10:36 GMT+8",
+  "phase": "NOAA 天气策略可行性审计",
   "summary": {
-    "totalMarkets": 120,
+    "totalMarkets": 2,
     "selectedMarkets": 0,
     "avgEntryPrice": null,
-    "strategyCount": 12,
+    "strategyCount": 1,
     "wins": 0,
     "winRate": null,
-    "totalPnlUsd": 0,
+    "totalPnlUsd": null,
     "roiPerBet": null
   },
   "strategies": [
     {
-      "name": "低价票 + 市场过滤 第三轮扫描",
-      "description": "第三轮给低价票加上流动性、成交量、分类过滤。看板顶部展示按总PnL排序的最佳组合。",
-      "status": "已完成第三轮扫描"
+      "name": "NOAA 24-48h 预测 vs Polymarket 天气市场",
+      "description": "当前完成的是可行性审计，不是假回测。真实收益回测需要“当时的 NOAA 预测快照”与“当时的市场价格”逐时对齐。",
+      "status": "缺核心历史预测数据，暂无法严谨回测"
     }
   ],
   "nextActions": [
-    "加入到期时间过滤（临近结算/长周期）",
-    "加入单市场最大下注次数限制",
-    "加入手续费、滑点、成交失败",
-    "接入你后续提供的新策略模板"
+    "接入 NOAA/NWS 历史 forecast snapshot 数据源",
+    "解析市场问题为 city/date/threshold",
+    "把 NOAA 预测映射为 fair value",
+    "再与当时 Polymarket 价格做偏差回测"
   ],
   "sampleMarkets": [
     {
-      "question": "filter=liquidity_1000 | threshold=0.03",
-      "price": null,
-      "liquidity": "bets=0 / wins=0",
-      "status": "PnL=0 | ROI=None"
+      "question": "已扫描的已结算美国天气样本",
+      "price": "0",
+      "liquidity": "当前本地样本不足",
+      "status": "blocked"
     },
     {
-      "question": "filter=liq_1000_vol_1000 | threshold=0.03",
-      "price": null,
-      "liquidity": "bets=0 / wins=0",
-      "status": "PnL=0 | ROI=None"
-    },
-    {
-      "question": "filter=non_sports_liq_1000_vol_1000 | threshold=0.03",
-      "price": null,
-      "liquidity": "bets=0 / wins=0",
-      "status": "PnL=0 | ROI=None"
-    },
-    {
-      "question": "filter=liquidity_1000 | threshold=0.05",
-      "price": null,
-      "liquidity": "bets=0 / wins=0",
-      "status": "PnL=0 | ROI=None"
-    },
-    {
-      "question": "filter=liq_1000_vol_1000 | threshold=0.05",
-      "price": null,
-      "liquidity": "bets=0 / wins=0",
-      "status": "PnL=0 | ROI=None"
-    },
-    {
-      "question": "filter=non_sports_liq_1000_vol_1000 | threshold=0.05",
-      "price": null,
-      "liquidity": "bets=0 / wins=0",
-      "status": "PnL=0 | ROI=None"
-    },
-    {
-      "question": "filter=volume_1000 | threshold=0.03",
-      "price": 0.01925,
-      "liquidity": "bets=4 / wins=0",
-      "status": "PnL=-4.0 | ROI=-1.0"
-    },
-    {
-      "question": "filter=non_sports_vol_1000 | threshold=0.03",
-      "price": 0.01925,
-      "liquidity": "bets=4 / wins=0",
-      "status": "PnL=-4.0 | ROI=-1.0"
-    },
-    {
-      "question": "filter=volume_1000 | threshold=0.05",
-      "price": 0.0337,
-      "liquidity": "bets=5 / wins=0",
-      "status": "PnL=-5.0 | ROI=-1.0"
-    },
-    {
-      "question": "filter=non_sports_vol_1000 | threshold=0.05",
-      "price": 0.0337,
-      "liquidity": "bets=5 / wins=0",
-      "status": "PnL=-5.0 | ROI=-1.0"
-    },
-    {
-      "question": "filter=baseline | threshold=0.03",
-      "price": 0.017125,
-      "liquidity": "bets=8 / wins=0",
-      "status": "PnL=-8.0 | ROI=-1.0"
-    },
-    {
-      "question": "filter=baseline | threshold=0.05",
-      "price": 0.0275,
-      "liquidity": "bets=9 / wins=0",
-      "status": "PnL=-9.0 | ROI=-1.0"
+      "question": "问题不在天气市场本身，而在缺少历史 NOAA 预测快照",
+      "price": "-",
+      "liquidity": "需要外部历史预测数据",
+      "status": "不能严谨回测"
     }
   ],
   "assumptions": {
-    "stake_per_bet_usd": 1.0,
-    "markets_sampled": 120,
-    "thresholds": [
-      0.03,
-      0.05
-    ],
-    "filters": [
-      {
-        "name": "baseline",
-        "min_liquidity": 0,
-        "min_volume": 0,
-        "exclude_categories": []
-      },
-      {
-        "name": "liquidity_1000",
-        "min_liquidity": 1000,
-        "min_volume": 0,
-        "exclude_categories": []
-      },
-      {
-        "name": "volume_1000",
-        "min_liquidity": 0,
-        "min_volume": 1000,
-        "exclude_categories": []
-      },
-      {
-        "name": "liq_1000_vol_1000",
-        "min_liquidity": 1000,
-        "min_volume": 1000,
-        "exclude_categories": []
-      },
-      {
-        "name": "non_sports_vol_1000",
-        "min_liquidity": 0,
-        "min_volume": 1000,
-        "exclude_categories": [
-          "Sports"
-        ]
-      },
-      {
-        "name": "non_sports_liq_1000_vol_1000",
-        "min_liquidity": 1000,
-        "min_volume": 1000,
-        "exclude_categories": [
-          "Sports"
-        ]
-      }
-    ],
     "notes": [
-      "只测已结算二元市场",
-      "首次触发阈值即买入 1 美元并持有到结算",
-      "加入流动性、成交量、分类过滤",
-      "未计入手续费、滑点、下单失败"
+      "NOAA 策略的核心 edge 来自官方预测 vs 市场价格偏差",
+      "只有最终天气结果，不足以重建当时的预测优势",
+      "当前不能把这个策略硬算成真实收益回测"
     ]
   }
 }
