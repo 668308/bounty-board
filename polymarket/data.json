@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-03-10 10:31 GMT+8",
-  "phase": "第二轮参数扫描回测",
+  "updatedAt": "2026-03-10 10:34 GMT+8",
+  "phase": "第三轮：加市场过滤的低价票策略",
   "summary": {
-    "totalMarkets": 80,
+    "totalMarkets": 120,
     "selectedMarkets": 0,
     "avgEntryPrice": null,
-    "strategyCount": 8,
+    "strategyCount": 12,
     "wins": 0,
     "winRate": null,
     "totalPnlUsd": 0,
@@ -13,62 +13,86 @@
   },
   "strategies": [
     {
-      "name": "低价扫货参数扫描",
-      "description": "扫描阈值 [0.01, 0.03, 0.05, 0.1] × 流动性过滤 [0, 1000]。当前看板顶部展示按总PnL排序的最佳组合。",
-      "status": "已完成第二轮扫描"
+      "name": "低价票 + 市场过滤 第三轮扫描",
+      "description": "第三轮给低价票加上流动性、成交量、分类过滤。看板顶部展示按总PnL排序的最佳组合。",
+      "status": "已完成第三轮扫描"
     }
   ],
   "nextActions": [
-    "加入手续费、滑点、流动性冲击",
-    "扩大历史样本规模",
-    "加入按成交量/分类/到期时间过滤",
-    "支持批量导入新策略继续扫描"
+    "加入到期时间过滤（临近结算/长周期）",
+    "加入单市场最大下注次数限制",
+    "加入手续费、滑点、成交失败",
+    "接入你后续提供的新策略模板"
   ],
   "sampleMarkets": [
     {
-      "question": "threshold=0.01 | min_liquidity=1000",
+      "question": "filter=liquidity_1000 | threshold=0.03",
       "price": null,
       "liquidity": "bets=0 / wins=0",
       "status": "PnL=0 | ROI=None"
     },
     {
-      "question": "threshold=0.03 | min_liquidity=1000",
+      "question": "filter=liq_1000_vol_1000 | threshold=0.03",
       "price": null,
       "liquidity": "bets=0 / wins=0",
       "status": "PnL=0 | ROI=None"
     },
     {
-      "question": "threshold=0.05 | min_liquidity=1000",
+      "question": "filter=non_sports_liq_1000_vol_1000 | threshold=0.03",
       "price": null,
       "liquidity": "bets=0 / wins=0",
       "status": "PnL=0 | ROI=None"
     },
     {
-      "question": "threshold=0.1 | min_liquidity=1000",
+      "question": "filter=liquidity_1000 | threshold=0.05",
       "price": null,
       "liquidity": "bets=0 / wins=0",
       "status": "PnL=0 | ROI=None"
     },
     {
-      "question": "threshold=0.01 | min_liquidity=0",
-      "price": 0.0057,
+      "question": "filter=liq_1000_vol_1000 | threshold=0.05",
+      "price": null,
+      "liquidity": "bets=0 / wins=0",
+      "status": "PnL=0 | ROI=None"
+    },
+    {
+      "question": "filter=non_sports_liq_1000_vol_1000 | threshold=0.05",
+      "price": null,
+      "liquidity": "bets=0 / wins=0",
+      "status": "PnL=0 | ROI=None"
+    },
+    {
+      "question": "filter=volume_1000 | threshold=0.03",
+      "price": 0.01925,
+      "liquidity": "bets=4 / wins=0",
+      "status": "PnL=-4.0 | ROI=-1.0"
+    },
+    {
+      "question": "filter=non_sports_vol_1000 | threshold=0.03",
+      "price": 0.01925,
+      "liquidity": "bets=4 / wins=0",
+      "status": "PnL=-4.0 | ROI=-1.0"
+    },
+    {
+      "question": "filter=volume_1000 | threshold=0.05",
+      "price": 0.0337,
       "liquidity": "bets=5 / wins=0",
       "status": "PnL=-5.0 | ROI=-1.0"
     },
     {
-      "question": "threshold=0.03 | min_liquidity=0",
+      "question": "filter=non_sports_vol_1000 | threshold=0.05",
+      "price": 0.0337,
+      "liquidity": "bets=5 / wins=0",
+      "status": "PnL=-5.0 | ROI=-1.0"
+    },
+    {
+      "question": "filter=baseline | threshold=0.03",
       "price": 0.017125,
       "liquidity": "bets=8 / wins=0",
       "status": "PnL=-8.0 | ROI=-1.0"
     },
     {
-      "question": "threshold=0.05 | min_liquidity=0",
-      "price": 0.0275,
-      "liquidity": "bets=9 / wins=0",
-      "status": "PnL=-9.0 | ROI=-1.0"
-    },
-    {
-      "question": "threshold=0.1 | min_liquidity=0",
+      "question": "filter=baseline | threshold=0.05",
       "price": 0.0275,
       "liquidity": "bets=9 / wins=0",
       "status": "PnL=-9.0 | ROI=-1.0"
@@ -76,21 +100,58 @@
   ],
   "assumptions": {
     "stake_per_bet_usd": 1.0,
-    "markets_sampled": 80,
+    "markets_sampled": 120,
     "thresholds": [
-      0.01,
       0.03,
-      0.05,
-      0.1
+      0.05
     ],
-    "liquidity_filters": [
-      0,
-      1000
+    "filters": [
+      {
+        "name": "baseline",
+        "min_liquidity": 0,
+        "min_volume": 0,
+        "exclude_categories": []
+      },
+      {
+        "name": "liquidity_1000",
+        "min_liquidity": 1000,
+        "min_volume": 0,
+        "exclude_categories": []
+      },
+      {
+        "name": "volume_1000",
+        "min_liquidity": 0,
+        "min_volume": 1000,
+        "exclude_categories": []
+      },
+      {
+        "name": "liq_1000_vol_1000",
+        "min_liquidity": 1000,
+        "min_volume": 1000,
+        "exclude_categories": []
+      },
+      {
+        "name": "non_sports_vol_1000",
+        "min_liquidity": 0,
+        "min_volume": 1000,
+        "exclude_categories": [
+          "Sports"
+        ]
+      },
+      {
+        "name": "non_sports_liq_1000_vol_1000",
+        "min_liquidity": 1000,
+        "min_volume": 1000,
+        "exclude_categories": [
+          "Sports"
+        ]
+      }
     ],
     "notes": [
       "只测已结算二元市场",
       "首次触发阈值即买入 1 美元并持有到结算",
-      "未计入手续费、滑点、买不到、仓位上限"
+      "加入流动性、成交量、分类过滤",
+      "未计入手续费、滑点、下单失败"
     ]
   }
 }
