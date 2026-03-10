@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-10 21:48 GMT+8",
+  "updatedAt": "2026-03-10 22:17 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -1176,21 +1176,6 @@
             "reactionGroups": [],
             "url": "https://github.com/episerver/content-js-sdk/issues/254#issuecomment-4022885233",
             "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDOOPtIbc7vzCAx",
-            "author": {
-              "login": "668308"
-            },
-            "authorAssociation": "NONE",
-            "body": "I am looking into this and plan to submit a PR shortly.\n\nPlan:\n1. Review the current preview-content path and draft-version behavior.\n2. Identify the safest default change for returning latest draft content.\n3. Add the patch with focused validation / test coverage where appropriate.\n\nETA: technical review first, then implementation.",
-            "createdAt": "2026-03-09T11:37:37Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/episerver/content-js-sdk/issues/254#issuecomment-4023132209",
-            "viewerDidAuthor": true
           }
         ]
       }
