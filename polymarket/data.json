@@ -1,0 +1,40 @@
+{
+  "updatedAt": "2026-03-10 10:27 GMT+8",
+  "phase": "第一版真实历史回测（简化假设）",
+  "summary": {
+    "totalMarkets": 50,
+    "selectedMarkets": 9,
+    "avgEntryPrice": 0.0275,
+    "strategyCount": 1,
+    "wins": 0,
+    "winRate": 0.0,
+    "totalPnlUsd": -9.0,
+    "roiPerBet": -1.0
+  },
+  "strategies": [
+    {
+      "name": "低于 5 美分扫货（首次触发版）",
+      "description": "已对已结算二元市场做第一版历史回测：价格首次跌到 5 美分以下即买入 1 美元，持有到结算。",
+      "status": "已回测"
+    }
+  ],
+  "nextActions": [
+    "加入手续费、滑点、流动性过滤",
+    "扩大历史样本规模",
+    "支持参数扫描（1¢ / 3¢ / 5¢ / 10¢）",
+    "支持多策略批量对比"
+  ],
+  "sampleMarkets": [],
+  "assumptions": {
+    "threshold": 0.05,
+    "min_price": 0.001,
+    "stake_per_bet_usd": 1.0,
+    "markets_sampled": 50,
+    "notes": [
+      "只测已结算二元市场",
+      "当某个 outcome 历史价格首次落入 <= 5 美分时，假设买入 1 美元并持有到结算",
+      "未计入手续费、滑点、下单失败、仓位上限",
+      "这是第一版真实历史回测，不是最终严谨版本"
+    ]
+  }
+}

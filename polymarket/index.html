@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Polymarket 回测看板</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0f1318;--panel:rgba(24,29,36,.9);--panel2:rgba(31,38,47,.92);--border:rgba(255,255,255,.09);--text:#eef4fb;--muted:#9fb0c4;--blue:#8fbcff;--green:#96ddb5;--amber:#f0cc8c;--red:#e7a0aa;--purple:#c0a8ff;--radius:18px;--shadow:0 16px 40px rgba(0,0,0,.22)}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at 0% 0%, rgba(111,195,255,.18), transparent 26%),radial-gradient(circle at 100% 0%, rgba(192,168,255,.14), transparent 28%),linear-gradient(180deg,#161b22 0%,#10151b 100%);min-height:100vh}
+    .shell{max-width:1380px;margin:0 auto;padding:22px 16px 36px}.hero,.card,.table-wrap,.list{background:var(--panel2);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow)}
+    .hero{padding:24px}.eyebrow{font-size:12px;color:#c8d3e2;letter-spacing:.08em;text-transform:uppercase;font-weight:800}.title{margin:10px 0 6px;font-size:clamp(30px,4vw,42px);font-weight:850;letter-spacing:-.03em}.subtitle,.muted{color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.card{padding:16px}.k{font-size:11px;color:#c1cbda;letter-spacing:.08em;text-transform:uppercase;font-weight:800}.v{margin-top:8px;font-size:28px;font-weight:850}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:16px}.list{padding:16px}.list h3,.table-wrap h3{margin:0 0 10px;font-size:14px}.pill{display:inline-flex;padding:5px 9px;border-radius:999px;border:1px solid var(--border);font-size:11px;font-weight:800;background:rgba(255,255,255,.04)} .blue{color:var(--blue)} .green{color:var(--green)} .amber{color:var(--amber)} .red{color:var(--red)}
+    .item{padding:12px 0;border-top:1px solid rgba(255,255,255,.06)} .item:first-of-type{border-top:none}.name{font-weight:800}.desc{font-size:12px;color:var(--muted);margin-top:4px}
+    .table-wrap{margin-top:16px;padding:16px;overflow:auto} table{width:100%;border-collapse:collapse;font-size:13px} th,td{text-align:left;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top} th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#c1cbda} a{color:var(--blue);text-decoration:none}
+    @media (max-width:900px){.stats,.grid{grid-template-columns:1fr}.shell{padding:16px 12px 28px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="eyebrow">WANGCAI · POLYMARKET BACKTEST</div>
+      <div class="title">Polymarket 回测看板</div>
+      <div class="subtitle">远程查看策略筛选、样本规模、候选市场与后续真实回测结果。当前是第一阶段：数据抓取 + 策略筛选层。</div>
+      <div class="muted" id="updated">加载中...</div>
+      <div class="stats" id="stats"></div>
+      <div class="grid">
+        <div class="list"><h3>当前策略</h3><div id="strategies"></div></div>
+        <div class="list"><h3>下一步</h3><div id="next"></div></div>
+      </div>
+    </section>
+    <section class="table-wrap">
+      <h3>样本市场</h3>
+      <table>
+        <thead><tr><th>Question</th><th>Price</th><th>Liquidity</th><th>Status</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </section>
+  </div>
+<script>
+const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+fetch('./data.json').then(r=>r.json()).then(data=>{
+  document.getElementById('updated').textContent=`更新时间：${data.updatedAt} · 阶段：${data.phase}`;
+  const stats=[
+    ['样本市场',data.summary.totalMarkets],
+    ['触发下注',data.summary.selectedMarkets],
+    ['胜场',data.summary.wins ?? '-'],
+    ['胜率',data.summary.winRate ?? '-'],
+    ['总PnL',data.summary.totalPnlUsd ?? '-'],
+    ['单笔ROI',data.summary.roiPerBet ?? '-'],
+    ['平均入场价',data.summary.avgEntryPrice ?? '-'],
+    ['策略数',data.summary.strategyCount]
+  ];
+  document.getElementById('stats').innerHTML=stats.map(([k,v])=>`<div class="card"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join('');
+  document.getElementById('strategies').innerHTML=(data.strategies||[]).map(s=>`<div class="item"><div class="name">${esc(s.name)}</div><div class="desc">${esc(s.description)}</div><div style="margin-top:8px"><span class="pill blue">${esc(s.status)}</span></div></div>`).join('') || '<div class="item"><div class="desc">暂无策略</div></div>';
+  document.getElementById('next').innerHTML=(data.nextActions||[]).map(x=>`<div class="item"><div class="name">${esc(x)}</div></div>`).join('');
+  document.getElementById('rows').innerHTML=(data.sampleMarkets||[]).map(m=>`<tr><td>${esc(m.question)}</td><td>${esc(m.price ?? '-')}</td><td>${esc(m.liquidity ?? '-')}</td><td>${esc(m.status ?? '-')}</td></tr>`).join('') || '<tr><td colspan="4">暂无样本</td></tr>';
+}).catch(err=>{document.getElementById('updated').textContent='加载失败：'+err});
+</script>
+</body>
+</html>
