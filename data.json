@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-10 20:17 GMT+8",
+  "updatedAt": "2026-03-10 20:47 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -157,6 +157,88 @@
         "nextActions": [
           "等待反馈",
           "如确认可做，再细化计划"
+        ],
+        "issueState": "CLOSED",
+        "links": {
+          "issue": "https://github.com/Scottcjn/rustchain-bounties/issues/1509"
+        },
+        "status": "Closed",
+        "comments": [
+          {
+            "id": "IC_kwDORGgqa87vqJMV",
+            "author": {
+              "login": "createkr"
+            },
+            "authorAssociation": "CONTRIBUTOR",
+            "body": "Submitted #1509 implementation: https://github.com/Scottcjn/Rustchain/pull/732. Payout wallet: RTC1d48d848a5aa5ecf2c5f01aa5fb64837daaf2f35 (split: createkr-wallet).",
+            "createdAt": "2026-03-09T03:11:30Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1509#issuecomment-4020802325",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87vzB3u",
+            "author": {
+              "login": "668308"
+            },
+            "authorAssociation": "NONE",
+            "body": "Claiming this bounty.\n\nPlan:\n1. Review the existing airdrop / deployment flow and current assumptions around Solana SPL deployment.\n2. Identify the expected token metadata, deployment path, and any missing integration points.\n3. Prepare a concrete implementation path with validation notes and a follow-up PR / draft PR.\n\nETA: initial assessment today, actionable implementation path after code review.",
+            "createdAt": "2026-03-09T11:37:30Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1509#issuecomment-4023131630",
+            "viewerDidAuthor": true
+          },
+          {
+            "id": "IC_kwDORGgqa87v4IVd",
+            "author": {
+              "login": "freefrog1986"
+            },
+            "authorAssociation": "NONE",
+            "body": "I would like to work on this",
+            "createdAt": "2026-03-09T15:11:15Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1509#issuecomment-4024468829",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87v4IaD",
+            "author": {
+              "login": "freefrog1986"
+            },
+            "authorAssociation": "NONE",
+            "body": "I'll work on this tracking task. Starting analysis now.",
+            "createdAt": "2026-03-09T15:11:18Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1509#issuecomment-4024469123",
+            "viewerDidAuthor": false
+          },
+          {
+            "id": "IC_kwDORGgqa87v6syP",
+            "author": {
+              "login": "Scottcjn"
+            },
+            "authorAssociation": "OWNER",
+            "body": "This bounty has been completed by createkr (PRs Scottcjn/Rustchain#732-735, merged March 9). Closing as fulfilled. Thanks for the interest — check the [bounty board](https://github.com/Scottcjn/rustchain-bounties/issues) for other open tasks\\!",
+            "createdAt": "2026-03-09T16:43:30Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1509#issuecomment-4025142415",
+            "viewerDidAuthor": false
+          }
         ]
       },
       {
