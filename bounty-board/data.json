@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-10 09:17 GMT+8",
+  "updatedAt": "2026-03-10 23:47 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -852,21 +852,6 @@
             "viewerDidAuthor": false
           },
           {
-            "id": "IC_kwDORGgqa87vs-7V",
-            "author": {
-              "login": "Ivan-houzhiwen"
-            },
-            "authorAssociation": "NONE",
-            "body": "Hi! I'd like to work on this bounty.\n\n**Analysis:**\n- Issue: `clawrtc wallet show` shows false offline state\n- Need to trace the CLI code and fix the network check\n\n**Plan:**\n1. Clone clawrtc repo\n2. Find wallet show command\n3. Fix false offline detection\n4. Add regression test\n\nCan start immediately. Wallet: Ivan-houzhiwen",
-            "createdAt": "2026-03-09T06:53:59Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4021546709",
-            "viewerDidAuthor": false
-          },
-          {
             "id": "IC_kwDORGgqa87vtzNy",
             "author": {
               "login": "qwldcl-del"
@@ -1009,11 +994,11 @@
           "看测试脚本",
           "评估最快 PR 路径"
         ],
-        "issueState": "OPEN",
+        "issueState": "CLOSED",
         "links": {
           "issue": "https://github.com/livepeer/docs/issues/803"
         },
-        "status": "Open",
+        "status": "Closed",
         "comments": [
           {
             "id": "IC_kwDOBplp387vzB8i",
@@ -1029,6 +1014,21 @@
             "reactionGroups": [],
             "url": "https://github.com/livepeer/docs/issues/803#issuecomment-4023131938",
             "viewerDidAuthor": true
+          },
+          {
+            "id": "IC_kwDOBplp387wWQEl",
+            "author": {
+              "login": "DeveloperAlly"
+            },
+            "authorAssociation": "COLLABORATOR",
+            "body": "Validated on docs-v2 on March 11, 2026. Closing as implemented by tests/unit/script-docs.test.js, which includes FRAMEWORK_REQUIRED_TAGS and validates framework header coverage.",
+            "createdAt": "2026-03-10T15:35:11Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/livepeer/docs/issues/803#issuecomment-4032364837",
+            "viewerDidAuthor": false
           }
         ]
       },
@@ -1053,11 +1053,11 @@
           "看迁移相关脚本",
           "判断实现成本"
         ],
-        "issueState": "OPEN",
+        "issueState": "CLOSED",
         "links": {
           "issue": "https://github.com/livepeer/docs/issues/804"
         },
-        "status": "Open",
+        "status": "Closed",
         "comments": [
           {
             "id": "IC_kwDOBplp387vzB9n",
@@ -1073,6 +1073,21 @@
             "reactionGroups": [],
             "url": "https://github.com/livepeer/docs/issues/804#issuecomment-4023132007",
             "viewerDidAuthor": true
+          },
+          {
+            "id": "IC_kwDOBplp387wWQEb",
+            "author": {
+              "login": "DeveloperAlly"
+            },
+            "authorAssociation": "COLLABORATOR",
+            "body": "Validated on docs-v2 on March 11, 2026. Closing as implemented by tools/scripts/repo-audit-orchestrator.js, with stage definitions in ai-tools/ai-skills/catalog/execution-manifest.json and runnable entry points in tools/package.json audit:repo scripts.",
+            "createdAt": "2026-03-10T15:35:11Z",
+            "includesCreatedEdit": false,
+            "isMinimized": false,
+            "minimizedReason": "",
+            "reactionGroups": [],
+            "url": "https://github.com/livepeer/docs/issues/804#issuecomment-4032364827",
+            "viewerDidAuthor": false
           }
         ]
       },
@@ -1191,21 +1206,6 @@
             "reactionGroups": [],
             "url": "https://github.com/episerver/content-js-sdk/issues/254#issuecomment-4022885233",
             "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDOOPtIbc7vzCAx",
-            "author": {
-              "login": "668308"
-            },
-            "authorAssociation": "NONE",
-            "body": "I am looking into this and plan to submit a PR shortly.\n\nPlan:\n1. Review the current preview-content path and draft-version behavior.\n2. Identify the safest default change for returning latest draft content.\n3. Add the patch with focused validation / test coverage where appropriate.\n\nETA: technical review first, then implementation.",
-            "createdAt": "2026-03-09T11:37:37Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/episerver/content-js-sdk/issues/254#issuecomment-4023132209",
-            "viewerDidAuthor": true
           }
         ]
       }
