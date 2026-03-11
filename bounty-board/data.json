@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-11 15:47 GMT+8",
+  "updatedAt": "2026-03-11 21:18 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -1102,15 +1102,17 @@
         "priorityScore": 88,
         "riskLevel": "low",
         "stage": "claiming",
-        "progress": 24,
+        "progress": 42,
         "notes": [
           "已公开认领",
-          "问题清楚，评论少",
-          "是当前优先开工候选之一"
+          "owner 已分配给我",
+          "已确认 clone() 根因：constructor 丢失 kwargs，重建 estimator 时误触发 LLM 初始化",
+          "已改成 sklearn 更兼容的 lazy init + 显式参数保存，并补了 clone/unfitted estimator 测试"
         ],
         "nextActions": [
-          "复现 sklearn 兼容问题",
-          "准备修复路径"
+          "跑更完整测试",
+          "整理 commit",
+          "准备提交 PR"
         ],
         "issueState": "OPEN",
         "links": {
