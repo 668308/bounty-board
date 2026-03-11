@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-12 01:18 GMT+8",
+  "updatedAt": "2026-03-12 02:18 GMT+8",
   "timezone": "Asia/Shanghai",
   "fx": {
     "RTC_USD_EST": 0.05,
@@ -507,21 +507,6 @@
         "status": "Closed",
         "comments": [
           {
-            "id": "IC_kwDORGgqa87vmm36",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "I'm looking into this and plan to submit a PR shortly.",
-            "createdAt": "2026-03-08T19:57:40Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4019875322",
-            "viewerDidAuthor": false
-          },
-          {
             "id": "IC_kwDORGgqa87vmx7h",
             "author": {
               "login": "zhdtty"
@@ -567,36 +552,6 @@
             "viewerDidAuthor": false
           },
           {
-            "id": "IC_kwDORGgqa87vnIX3",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "I'm looking into this and plan to submit a PR shortly.",
-            "createdAt": "2026-03-08T21:06:24Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020012535",
-            "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDORGgqa87vnJLU",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "## Implementation Plan\n\nProblem: clawrtc wallet show was showing false could not reach network error even when network was reachable.\n\nRoot Cause: The RustChain node at https://50.28.86.131 has an SSL certificate mismatch (cert is for a different hostname). The original code used urllib.request.urlopen() without SSL context, causing SSL verification to fail silently.\n\nSolution: \n1. Added SSL context with check_hostname=False and verify_mode=CERT_NONE for IP-based node URLs\n2. Added specific handling for HTTPError (404 returns wallet not found instead of generic error)\n3. Added regression test in tests/test_wallet_show_ssl.py\n\nChanges:\n- sdk/python/rustchain_sdk/cli.py - 3 network calls fixed\n- tests/test_wallet_show_ssl.py - new regression test\n\nETA: PR ready for review. \nPR: https://github.com/seraphim941/Rustchain/pull/new/fix/wallet-show-ssl",
-            "createdAt": "2026-03-08T21:08:36Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020015828",
-            "viewerDidAuthor": false
-          },
-          {
             "id": "IC_kwDORGgqa87vnVaI",
             "author": {
               "login": "whitebrendan"
@@ -609,51 +564,6 @@
             "minimizedReason": "",
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020065928",
-            "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDORGgqa87vntw3",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "I'm working on this issue. I'll investigate the wallet show command, trace the API call path, fix the false offline state bug, and add a regression test. Plan to submit PR within 24-48 hours.",
-            "createdAt": "2026-03-08T22:36:42Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020165687",
-            "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDORGgqa87vnuo_",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "Update: I see PR #651 was already merged fixing the root cause (wrong endpoint /api/balance -> /wallet/balance). The fix is already in clawrtc 1.7.1.\n\nHowever, this bounty also requires a regression test. Let me add a proper test to ensure this doesn't regress. I'll submit a test PR to ensure wallet show works correctly with both healthy and unhealthy network conditions.",
-            "createdAt": "2026-03-08T22:38:56Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020169279",
-            "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDORGgqa87vnvH5",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "## Progress Update\n\nI've analyzed this bounty and found:\n\n1. **Root cause already fixed**: PR #651 already fixed the underlying bug (wrong endpoint /api/balance -> /wallet/balance)\n\n2. **Regression test added**: I've submitted PR #703 with a regression test that verifies:\n   - Correct endpoint path is used (/wallet/balance?miner_id=)\n   - Balance response is correctly parsed\n   - Network errors are handled gracefully\n   - Integration test confirms API works\n\n3. **Verification**: Tested locally - clawrtc wallet show now correctly displays balance (0.0 RTC)\n\nWallet: RTC8ec8c073feb71b007ded0b89b427dc085ed90dca\n\nPR: https://github.com/Scottcjn/Rustchain/pull/703",
-            "createdAt": "2026-03-08T22:40:15Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020171257",
             "viewerDidAuthor": false
           },
           {
@@ -699,36 +609,6 @@
             "minimizedReason": "",
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020214717",
-            "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDORGgqa87voL6-",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "I'm working on this fix. The issue is clear: CLI uses wrong endpoint /api/wallet/{address} (404), should use /wallet/balance?miner_id={address}. ETA: 30 mins.",
-            "createdAt": "2026-03-08T23:48:37Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020289214",
-            "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDORGgqa87voMLs",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "PR submitted: https://github.com/Scottcjn/Rustchain/pull/713\n\n**Fix Summary:**\n- Changed endpoint from  (404) to \n- Updated response parsing to handle  field\n\nThe bug was caused by using wrong endpoint that returned 404, causing the \"could not reach network\" error.",
-            "createdAt": "2026-03-08T23:49:21Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4020290284",
             "viewerDidAuthor": false
           },
           {
@@ -819,36 +699,6 @@
             "minimizedReason": "",
             "reactionGroups": [],
             "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4021259240",
-            "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDORGgqa87vsGy4",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "Claiming this issue. I'll investigate the  bug, fix the false offline state, and add a regression test. Plan: 1) Clone repo and trace the wallet show code 2) Identify the bug in the health/balance check 3) Fix and add test. ETA: 24 hours.",
-            "createdAt": "2026-03-09T05:48:06Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4021316792",
-            "viewerDidAuthor": false
-          },
-          {
-            "id": "IC_kwDORGgqa87vsHnH",
-            "author": {
-              "login": "seraphim941"
-            },
-            "authorAssociation": "NONE",
-            "body": "Claimed! I'll fix the clawrtc wallet show false offline issue.",
-            "createdAt": "2026-03-09T05:49:16Z",
-            "includesCreatedEdit": false,
-            "isMinimized": false,
-            "minimizedReason": "",
-            "reactionGroups": [],
-            "url": "https://github.com/Scottcjn/rustchain-bounties/issues/1490#issuecomment-4021320135",
             "viewerDidAuthor": false
           },
           {
